@@ -4351,7 +4351,7 @@ hold_court.4001 = {
 			has_court_event_flag = no
 			is_ai = yes
 		}
-		root.primary_heir = {
+		root.primary_heir ?= { # FIX: Handle non-existing scope
 			has_court_event_flag = no
 			is_ai = yes
 			age >= 13
@@ -6084,7 +6084,7 @@ hold_court.4400 = {
 			limit = { hold_court_4400_safety_vassal_trigger = yes }
 			add_to_list = possible_wants_safety_vassal
 		}
-		
+
 		#Pick a weapons_vassal
 		random_in_list = {
 			list = possible_wants_weapons_vassal
@@ -22964,7 +22964,7 @@ hold_court.7030 = {
 			any_courtier_or_guest = {
 				has_court_event_flag = no
 				has_trait = varangian
-				is_available_healthy_ai_adult = yes			
+				is_available_healthy_ai_adult = yes
 				NOT = { this = scope:hold_court_7030_vassal_temp }
 			}
 		}
@@ -31102,7 +31102,7 @@ scripted_trigger hold_court_8100_parent_trigger = { # is a parent eligible to ad
 		AND = {
 			exists = scope:ward_employer
 			employer = scope:ward_employer
-		}	
+		}
 	}
 }
 
@@ -34086,8 +34086,8 @@ scripted_trigger hold_court_8160_valid_hostile_scheme_trigger = {
 
 # Is the character a valid advocate of the victim?
 scripted_trigger hold_court_8160_valid_concerned_trigger = {
-	NOR = { 
-		this = root 
+	NOR = {
+		this = root
 		this = scope:accused
 	}
 	is_available_ai_adult = yes
@@ -42064,7 +42064,7 @@ hold_court.8240 = {
 							is_landed = yes
 						}
 					}
-					scope:vassal_jealous = { add_courtier = scope:yearn_target } 
+					scope:vassal_jealous = { add_courtier = scope:yearn_target }
 				}
 				else = {
 					if = {
