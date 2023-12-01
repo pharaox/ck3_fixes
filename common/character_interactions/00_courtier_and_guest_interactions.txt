@@ -565,7 +565,7 @@ invite_to_court_interaction = {
 			exists = scope:recipient
 			scope:recipient = {
 				is_pool_guest = no
-				location.province_owner = {
+				location.province_owner ?= { # FIX: Handle non-existing scope
 					OR = {
 						any_liege_or_above = { this = scope:actor }
 						this = scope:actor
@@ -886,7 +886,7 @@ invite_to_court_interaction = {
  			desc = AI_CAN_BE_PERSUADED_TO_STAY
 
 			is_pool_guest = no
-			location.province_owner = {
+			location.province_owner ?= { # FIX: Handle non-existing scope
 				OR = {
 					any_liege_or_above = { this = scope:actor }
 					this = scope:actor
@@ -994,7 +994,7 @@ invite_to_court_interaction = {
 				amenity_level = { type = court_lodging_standards value >=  medium_amenity_level }
 			}
  		}
-		
+
  		modifier = {
  			add = {
 				value = scope:actor.house.house_unity_value
