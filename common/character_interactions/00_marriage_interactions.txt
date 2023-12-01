@@ -289,8 +289,8 @@ arrange_marriage_interaction = {
 				add = scope:actor.medium_piety_value
 				desc = STRUGGLE_MARRIAGE_ACCEPTANCE_USING_PIETY_AS_CURRENCY
 			}
-            
-            # Struggle parameters
+
+			# Struggle parameters
 
             #interfaith wedding costs piety
             if = {
@@ -1157,6 +1157,9 @@ marry_off_interaction = {
 					exists = scope:actor
 					exists = scope:recipient
 					exists = scope:secondary_recipient
+					# FIX: Fix prestige loss when marrying off unrelated characters
+					exists = scope:secondary_actor
+					scope:secondary_actor = { is_close_family_of = scope:actor }
 					scope:recipient = {
 						OR = {
 							AND = {
@@ -1352,7 +1355,7 @@ marry_off_interaction = {
 			VALUE = medium_unity_gain
 			DESC = clan_unity_marry_off.desc
 			REVERSE_NON_HOUSE_TARGET = no
-		}		
+		}
 
 		scope:actor = {
 			if = {
@@ -1385,7 +1388,7 @@ marry_off_interaction = {
 			VALUE = medium_unity_loss
 			DESC = clan_unity_marry_off_decline.desc
 			REVERSE_NON_HOUSE_TARGET = no
-		}		
+		}
 	}
 
 	auto_accept = {
@@ -2518,7 +2521,7 @@ break_betrothal_interaction = {
 			VALUE = major_unity_loss
 			DESC = clan_unity_betrothal_breakage.desc
 			REVERSE_NON_HOUSE_TARGET = no
-		}		
+		}
 	}
 
 	auto_accept = yes
@@ -4095,7 +4098,9 @@ divorce_character_house_head_interaction = {
 
 				right_icon = scope:actor.house.house_head
 			}
+		}
 
+		# FIX: Move add_clan_unity_interaction_effect outside of scope:actor
 		# If we're a clan this interaction affects unity
 		add_clan_unity_interaction_effect = {
 			CHARACTER = scope:actor
@@ -4103,7 +4108,6 @@ divorce_character_house_head_interaction = {
 			VALUE = minor_unity_loss
 			DESC = clan_unity_divorce_grant_refusal.desc
 			REVERSE_NON_HOUSE_TARGET = no
-		}
 		}
 	}
 
@@ -4461,7 +4465,9 @@ divorce_character_rel_head_interaction = {
 
 				right_icon = scope:actor.faith.religious_head
 			}
+		}
 
+		# FIX: Move add_clan_unity_interaction_effect outside of scope:actor
 		# If we're a clan this interaction affects unity
 		add_clan_unity_interaction_effect = {
 			CHARACTER = scope:actor
@@ -4469,7 +4475,6 @@ divorce_character_rel_head_interaction = {
 			VALUE = minor_unity_loss
 			DESC = clan_unity_alliance.desc
 			REVERSE_NON_HOUSE_TARGET = no
-		}
 		}
 	}
 
@@ -4603,7 +4608,7 @@ divorce_character_dynast_request_interaction = {
 		}
 		scope:actor = { has_minor_renown = yes }
 		#scope:actor.dynasty = {
-		#	dynasty_prestige >= scope:actor.dynasty.minor_dynasty_prestige_value
+			#	dynasty_prestige >= scope:actor.dynasty.minor_dynasty_prestige_value
 		#}
 
 		NOT = {
@@ -4781,7 +4786,7 @@ divorce_character_dynast_request_rel_head_interaction = {
 		}
 		scope:actor = { has_minor_renown = yes }
 		#scope:actor.dynasty = {
-		#	dynasty_prestige >= scope:actor.dynasty.minor_dynasty_prestige_value
+			#	dynasty_prestige >= scope:actor.dynasty.minor_dynasty_prestige_value
 		#}
 
 		scope:secondary_actor = { is_busy_in_events_localised = yes }
