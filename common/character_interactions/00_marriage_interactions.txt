@@ -3667,7 +3667,7 @@ dismiss_concubine_interaction = {
 divorce_character_interaction = {
 	category = interaction_category_diplomacy
 	use_diplomatic_range = no
-	icon = icon_marriage
+	icon = icon_divorce
 
 	desc = divorce_character_interaction_desc
 	cost = { piety = divorce_cost }
@@ -3788,7 +3788,7 @@ divorce_character_interaction = {
 divorce_character_house_head_interaction = {
 	category = interaction_category_diplomacy
 	use_diplomatic_range = no
-	icon = icon_marriage
+	icon = icon_divorce
 
 	cost = {
 		piety = divorce_cost
@@ -4158,7 +4158,7 @@ divorce_character_house_head_interaction = {
 divorce_character_rel_head_interaction = {
 	category = interaction_category_diplomacy
 	use_diplomatic_range = no
-	icon = icon_marriage
+	icon = icon_divorce
 
 	cost = {
 		piety = divorce_cost

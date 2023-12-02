@@ -541,6 +541,7 @@ invite_to_court_interaction = {
 				}
 				is_ruler = yes
 				has_trait = order_member
+				location = { is_sea_province = yes }
 			}
 		}
 	}
