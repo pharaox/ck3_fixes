@@ -268,7 +268,7 @@ hold_court.0021 = {
 		# Guaranteed small grandeur reward, in addition to any from events
 		change_current_court_grandeur = minor_court_grandeur_gain
 		# LEGITIMACY GAIN FROM HOLDING COURT
-		add_legitimacy = minor_legitimacy_gain
+		add_legitimacy_effect = { LEGITIMACY = minor_legitimacy_gain }
 	}
 }
 
@@ -2408,7 +2408,7 @@ hold_court.3040 = {
 	# Option A: Employ peasant
 	option = {
 		name = hold_court.3040.a
-
+		custom_tooltip = unop.hold_court.3040.a.aptitude
 		trigger = {
 			can_appoint_char_to_court_position = {
 				CHAR = scope:potential_jester
@@ -2463,6 +2463,7 @@ hold_court.3040 = {
 			}
 		}
 		name = hold_court.3040.b
+		custom_tooltip = unop.hold_court.3040.b.aptitude
 
 		appoint_court_position = {
 			recipient = scope:jester_requester
@@ -2505,6 +2506,7 @@ hold_court.3040 = {
 	# Option C: Employ killjoy as jester
 	option = {
 		name = hold_court.3040.c
+		custom_tooltip = unop.hold_court.3040.c.aptitude
 
 		trigger = {
 			can_appoint_char_to_court_position = {
@@ -9676,7 +9678,7 @@ hold_court.5020 = {
 		roles = {
 			scope:peasant = {
 				group = petitioners_group
-				animation = sadness
+				animation = dancing_plague
 			}
 			scope:portrait_2 = {
 				group = petitioners_group
@@ -9692,142 +9694,16 @@ hold_court.5020 = {
 	}
 
 	trigger = {
-		NOT = { has_character_flag = had_event_hold_court_5020 }
+		NOT = { has_character_flag = had_event_dancing_plague }
 		any_realm_province = {
 			hold_court_5020_province_trigger = yes
 		}
 	}
 
-	weight_multiplier = {
-		base = 0.25
-		modifier = {
-			add = {
-				if = { #Since a big outbreak occurred in Aachen 1374
-					limit = {
-						any_sub_realm_county = {
-							this = title:c_aachen
-							any_county_province = {
-								hold_court_5020_province_trigger = yes
-							}
-						}
-					}
-					add = {
-						if = {
-							limit = {
-								current_date >= 1374.1.1
-								current_date <= 1375.1.1
-							}
-							add = 1
-						}
-						else = {
-							add = 0.5
-						}
-					}
-				}
-				else_if = { #Since an outbreak occurred in Erfurt 1247
-					limit = {
-						any_sub_realm_county = {
-							duchy = title:d_thuringia
-							any_county_province = {
-								hold_court_5020_province_trigger = yes
-							}
-						}
-					}
-					add = {
-						if = {
-							limit = {
-								current_date >= 1247.1.1
-								current_date <= 1248.1.1
-							}
-							add = 1
-						}
-						else = {
-							add = 0.5
-						}
-					}
-				}
-				else_if = { #Since an outbreak occurred in Kolbigk 1021
-					limit = {
-						capital_province = {
-							geographical_region = ghw_region_saxony
-							hold_court_5020_province_trigger = yes
-						}
-					}
-					add = {
-						if = {
-							limit = {
-								current_date >= 1021.1.1
-								current_date <= 1022.1.1
-							}
-							add = 1
-						}
-						else = {
-							add = 0.5
-						}
-					}
-				}
-				else = { #Since it historically occurred in Europe
-					add = 0.25
-				}
-			}
-			capital_province = {
-				geographical_region = world_europe
-				hold_court_5020_province_trigger = yes
-			}
-		}
-
-		# No court weighting, since no court would make this more likely.
-	}
-
 	immediate = {
-		add_character_flag = {
-			flag = had_event_hold_court_5020
-			years = 10
-		}
+		add_character_flag = had_event_dancing_plague
 		random_realm_province = {
 			limit = {
-				hold_court_5020_province_trigger = yes
-				OR = {
-					AND = {
-						county = { this = title:c_aachen }
-						current_date >= 1374.1.1
-						current_date <= 1375.1.1
-					}
-					AND = {
-						duchy = { this = title:d_thuringia }
-						current_date >= 1247.1.1
-						current_date <= 1248.1.1
-					}
-					AND = {
-						county.title_province = {
-							geographical_region = ghw_region_saxony
-						}
-						current_date >= 1021.1.1
-						current_date <= 1022.1.1
-					}
-				}
-			}
-			alternative_limit = {
-				hold_court_5020_province_trigger = yes
-				county = { this = title:c_aachen }
-			}
-			alternative_limit = {
-				hold_court_5020_province_trigger = yes
-				duchy = { this = title:d_thuringia }
-			}
-			alternative_limit = {
-				hold_court_5020_province_trigger = yes
-				county.title_province = {
-					geographical_region = ghw_region_saxony
-				}
-			}
-			alternative_limit = {
-				hold_court_5020_province_trigger = yes
-				county.title_province = {
-					geographical_region = world_europe
-				}
-			}
-			alternative_limit = {
 				hold_court_5020_province_trigger = yes
 			}
 			save_scope_as = province
@@ -9915,6 +9791,7 @@ hold_court.5020 = {
 				}
 			}
 		}
+
 		# Trigger next event in chain.
 		hold_court_queue_next_event_effect = yes
 	}
@@ -9922,14 +9799,6 @@ hold_court.5020 = {
 
 	option = { # It looks like you're having a grand time, what are you complaining about?
 		name = hold_court.5020.a
-		scope:province = {
-			county = {
-				add_county_modifier = {
-					modifier = dance_plague_modifier
-					days = 3650
-				}
-			}
-		}
 		stress_impact = {
 			base = medium_stress_impact_loss
 			compassionate = major_stress_impact_gain
@@ -9974,6 +9843,16 @@ hold_court.5020 = {
 			}
 		}
 
+		scope:province = {
+			random = {
+				chance = 25
+				create_epidemic_outbreak = {
+					type = ergotism
+					intensity = minor
+				}
+			}
+		}
+
 		stress_impact = {
 			zealous = medium_stress_impact_loss
 			cynical = medium_stress_impact_gain
@@ -9993,7 +9872,7 @@ hold_court.5020 = {
 		scope:province = {
 			county = {
 				add_county_modifier = {
-					modifier = contained_dance_plague_modifier
+					modifier = physician_dance_plague_modifier
 					days = 3650
 				}
 			}
@@ -10010,6 +9889,17 @@ hold_court.5020 = {
 				}
 			}
 		}
+
+		scope:province = {
+			random = {
+				chance = 25
+				create_epidemic_outbreak = {
+					type = ergotism
+					intensity = minor
+				}
+			}
+		}
+
 		add_learning_lifestyle_xp = medium_lifestyle_xp
 	}
 
@@ -10017,6 +9907,7 @@ hold_court.5020 = {
 		name = hold_court.5020.d
 		trigger = {
 			employs_court_position = court_musician_court_position
+			has_trait = eccentric
 			any_court_position_holder = {
 		        type = court_musician_court_position
 		        is_physically_able_adult = yes
@@ -10042,8 +9933,20 @@ hold_court.5020 = {
 				}
 			}
 		}
+
+		scope:province = {
+			random = {
+				chance = 90
+				create_epidemic_outbreak = {
+					type = ergotism
+					intensity = minor
+				}
+			}
+		}
+
 		stress_impact = {
 			lifestyle_reveler = major_stress_impact_loss
+			eccentric = major_stress_impact_loss
 		}
 	}
 
@@ -19515,7 +19418,7 @@ hold_court.6200 = {
 									increase_wounds_effect = { REASON = hunting_accident }
 								}
 								add_prestige = minor_prestige_loss
-								change_current_court_grandeur = minor_court_grandeur_gain
+								change_current_court_grandeur = minor_court_grandeur_loss
 							}
 						}
 					}
@@ -37932,6 +37835,7 @@ hold_court.8190 = {
 			is_available_ai_adult = yes
 			culture = root.culture
 			NOT = { has_trait = humble }
+			NOT = { this = scope:other_temp }
 			NOR = {
 				has_relation_friend = scope:other_temp
 				scope:other_temp = {
@@ -37968,6 +37872,7 @@ hold_court.8190 = {
 				is_available_ai_adult = yes
 				culture = root.culture
 				NOT = { has_trait = humble }
+				NOT = { this = scope:other_vassal }
 				NOR = {
 					has_relation_friend = scope:other_vassal
 					scope:other_vassal = {
@@ -38034,6 +37939,15 @@ hold_court.8190 = {
 		}
 		# Trigger next event in chain.
 		hold_court_queue_next_event_effect = yes
+
+		if = { 
+			limit = {
+				debug_only = yes
+				NOT = { exists = scope:aggressor_vassal }
+			}
+			debug_log = "Unop: For hold_court.8190 diagnostic. aggressor_vassal is undefined"
+			debug_log_scopes = yes
+		}
 	}
 
 	option = { # Demand culture adoption
