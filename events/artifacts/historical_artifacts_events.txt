@@ -9,7 +9,7 @@ historical_artifacts.0023 = {
 	immediate = {
 		# Seeded Court Artifacts
 		if = {
-			limit = { has_dlc_feature = royal_court }
+			limit = { has_dlc_feature = royal_court } 
 			# All starting courts will have a dynasty banner
 			every_character_with_royal_court = {
 				limit = { exists = house } # FIX: Avoid errors when house doesn't exist
@@ -23,7 +23,7 @@ historical_artifacts.0023 = {
 					TARGET = scope:banner_ruler.house
 				}
 				# Dynasty Banner
-				If = {
+				If = { 
 					limit = {
 						OR = {
 							this = dynasty.dynast # Dynasty Head
@@ -301,6 +301,17 @@ historical_artifacts.0023 = {
 				create_artifact_throne_charlemagne_effect = { OWNER = this }
 			}
 		}
+		### Throne of Solomon (the Byzantine one)
+		if = {
+			limit = {
+				has_ep3_dlc_trigger = yes
+				exists = title:e_byzantium.holder
+				current_date >= 940.1.1
+			}
+			title:e_byzantium.holder = {
+				create_artifact_byz_throne_effect = { OWNER = this }
+			}
+		}
 		## Furniture
 		### Pentapyrgion
 		if = {
@@ -362,7 +373,7 @@ historical_artifacts.0023 = {
 				create_artifact_curtana_effect = { OWNER = this }
 			}
 		}
-		### Sword of Atilla
+		### Sword of Atilla 
 		#### Associated with the Arpads, but "discovered"/passed out of their possession around or after 1063. They maintain a house claim on it.
 		if = {
 			limit = {
@@ -618,7 +629,7 @@ historical_artifacts.0023 = {
 				exists = title:k_transoxiana
 			}
 			title:k_transoxiana.holder = {
-				create_artifact_oxus_bracelet_effect = {
+				create_artifact_oxus_bracelet_effect = { 
 					OWNER = this
 				}
 			}
@@ -643,6 +654,97 @@ historical_artifacts.0023 = {
 					modifier = artifact_stress_gain_3_modifier
 					modifier = artifact_monthly_prestige_5_modifier
 					modifier = artifact_court_grandeur_baseline_add_3_modifier
+				}
+			}
+		}
+		### Statue of Constantine the Great
+		### Statue of Roman Woman
+		### Four Tetrarchs Statue
+		### Hydraulic Organ
+		if = {
+			limit = {
+				has_ep3_dlc_trigger = yes
+				exists = title:e_byzantium.holder
+			}
+			title:e_byzantium.holder = {
+				create_artifact_statue_constantine_effect = { OWNER = this }
+				create_artifact_statue_roman_woman_effect = { OWNER = this }
+				create_artifact_statue_four_tetrarchs_effect = { OWNER = this }
+				create_artifact_hydraulic_organ_effect = { OWNER = this }
+			}
+		}
+		### Tree automa
+		if = {
+			limit = {
+				has_ep3_dlc_trigger = yes
+				exists = title:e_byzantium.holder
+				current_date >= 940.1.1
+			}
+			title:e_byzantium.holder = {
+				create_artifact_tree_automa_effect = { OWNER = this }
+			}
+		}
+		### Spread some Orthodox icons
+		every_county_in_region = {
+			region = world_europe_east
+			holder = {
+				if = {
+					limit = {
+						faith = faith:orthodox
+					}
+					add_to_list = potential_icons_holders_list
+				}
+			}
+		}
+		every_county_in_region = {
+			region = world_asia_minor
+			holder = {
+				if = {
+					limit = {
+						faith = faith:orthodox
+					}
+					add_to_list = potential_icons_holders_list
+				}
+			}
+		}
+		every_county_in_region = {
+			region = world_europe_south_east
+			holder = {
+				if = {
+					limit = {
+						faith = faith:orthodox
+					}
+					add_to_list = potential_icons_holders_list
+				}
+			}
+		}
+		every_county_in_region = {
+			region = world_europe_south_italy
+			holder = {
+				if = {
+					limit = {
+						faith = faith:orthodox
+					}
+					add_to_list = potential_icons_holders_list
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_in_list = { list = potential_icons_holders_list }
+			}
+			while = {
+				count = 4
+				random_in_list = {
+					list = potential_icons_holders_list
+					limit = {
+						NOT = { has_character_flag = seeded_relic }
+					}
+					create_artifact_trinket_icon_ancient_effect = { OWNER = this }
+					add_character_flag = {
+						flag = seeded_relic
+						days = 1
+					}
 				}
 			}
 		}

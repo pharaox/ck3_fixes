@@ -12,11 +12,23 @@ scripted_effect travel_danger_events_6000_beast_duel_effect = {
 					multiplier = 1
 					min = -49
 				}
-				root = {
-					send_interface_toast = {
-						title = travel_danger_events.6000.success
-						left_icon = $FIGHTER$
-						$FIGHTER$ = { add_prestige = medium_prestige_gain }
+				if = {
+					limit = { this = root }
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.success_root
+							left_icon = $FIGHTER$
+							add_prestige = medium_prestige_gain
+						}
+					}
+				}
+				else = { 
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.success
+							left_icon = $FIGHTER$
+							$FIGHTER$ = { add_prestige = medium_prestige_gain }
+						}
 					}
 				}
 				min = 1
@@ -36,12 +48,24 @@ scripted_effect travel_danger_events_6000_beast_duel_effect = {
 					multiplier = -3.5
 					min = -49
 				}
-				root = {
-					send_interface_toast = {
-						title = travel_danger_events.6000.wound
-						left_icon = $FIGHTER$
-						$FIGHTER$ = {
+				if = {
+					limit = { this = root }
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.wound_root
+							left_icon = $FIGHTER$
 							hunt_animal_wound_effect = { VARIABLE = root.var:animal_type }
+						}
+					}
+				}
+				else = { 
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.wound
+							left_icon = $FIGHTER$
+							$FIGHTER$ = {
+								hunt_animal_wound_effect = { VARIABLE = root.var:animal_type }
+							}
 						}
 					}
 				}
@@ -54,12 +78,24 @@ scripted_effect travel_danger_events_6000_beast_duel_effect = {
 					multiplier = -3.5
 					min = -49
 				}
-				root = {
-					send_interface_toast = {
-						title = travel_danger_events.6000.failure
-						left_icon = $FIGHTER$
-						$FIGHTER$ = {
+				if = {
+					limit = { this = root }
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.failure_root
+							left_icon = $FIGHTER$
 							hunt_animal_death_effect = { VAR = root.var:animal_type }
+						}
+					}
+				}
+				else = { 
+					root = {
+						send_interface_toast = {
+							title = travel_danger_events.6000.failure
+							left_icon = $FIGHTER$
+							$FIGHTER$ = {
+								hunt_animal_death_effect = { VAR = root.var:animal_type }
+							}
 						}
 					}
 				}
@@ -132,6 +168,7 @@ travel_danger_events.6000 = { #Animal attack
 
 	immediate = {
 		mp_delay_travel_plan = { DAYS = 90 }
+		save_scope_as = root_scope
 		save_scope_as = big_local_game
 		hunt_activity_dangerous_game_effect = { PROVINCE = location }
 		current_travel_plan ?= { # FIX: Handle non-existing scope
@@ -149,6 +186,10 @@ travel_danger_events.6000 = { #Animal attack
 					}
 					modifier = {
 						add = 10
+						has_court_position = akolouthos_court_position
+					}
+					modifier = {
+						add = 10
 						is_knight_of = root
 					}
 				}
@@ -162,7 +203,7 @@ travel_danger_events.6000 = { #Animal attack
 				}
 				travel_leader ?= { save_scope_as = travel_leader }
 			}
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 		traveler_danger_xp_effect = {
@@ -195,7 +236,7 @@ travel_danger_events.6000 = { #Animal attack
 			craven = medium_stress_gain
 		}
 		travel_danger_events_6000_beast_duel_effect = { FIGHTER = root }
-
+		
 		ai_chance = {
 			base = 100
 			modifier = {
@@ -203,7 +244,7 @@ travel_danger_events.6000 = { #Animal attack
 				has_trait = craven
 			}
 		}
-
+		
 	}
 
 	option = { #Distract with someone else
@@ -267,7 +308,7 @@ travel_danger_events.6000 = { #Animal attack
 		mp_resume_travel_plan = yes
 		#Second time getting the event in a short while
 		if = {
-			limit = {
+			limit = { 
 				is_alive = yes
 				has_character_flag = had_travel_danger_event_6000_recently
 				NOT = { has_character_flag = had_travel_danger_event_6000_twice_recently }
@@ -287,7 +328,7 @@ travel_danger_events.6000 = { #Animal attack
 				flag = had_travel_danger_event_6000_recently
 				years = 1
 			}
-		}
+		}	
 	}
 }
 
@@ -435,7 +476,7 @@ travel_danger_events.6010 = { #Siege
 			}
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 	}
@@ -474,7 +515,7 @@ travel_danger_events.6010 = { #Siege
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 		traveler_danger_xp_effect = {
@@ -539,25 +580,22 @@ travel_danger_events.6010 = { #Siege
 				factor = 0
 				has_trait = brave
 			}
-		}
+		}	
 	}
 
 	option = { #Impress
 		name = {
 			text = travel_danger_events.6010.b.friend
 			trigger = {
-				exists = scope:siege_commander
 				has_any_good_relationship_with_character_trigger = { CHARACTER = scope:siege_commander }
 			}
 		}
 		name = {
 			text = travel_danger_events.6010.b
 			trigger = {
-				trigger_if = {
-					limit = { exists = scope:siege_commander }
-					NOT = { has_any_good_relationship_with_character_trigger = { CHARACTER = scope:siege_commander } }
+				NOT = {
+					has_any_good_relationship_with_character_trigger = { CHARACTER = scope:siege_commander }
 				}
-				trigger_else = { always = yes }
 			}
 		}
 		flavor = travel_danger_events.6010.b.flavor
@@ -588,22 +626,18 @@ travel_danger_events.6010 = { #Siege
 					any_vassal_or_below = { this = scope:siege_owner }
 				}
 				modifier = { # Hierachy
-					exists = scope:siege_commander
 					add = 5
 					any_vassal_or_below = { this = scope:siege_commander }
 				}
 				modifier = { # Relations
-					exists = scope:siege_commander
 					add = 10
 					has_any_good_relationship_with_character_trigger = { CHARACTER = scope:siege_commander }
 				}
 				modifier = { # Relations
-					exists = scope:siege_commander
 					add = 10
 					is_close_family_of = scope:siege_commander
 				}
 				opinion_modifier = { # Opinion
-					trigger = { exists = scope:siege_commander }
 					who = scope:siege_commander
 					opinion_target = root
 					multiplier = 0.5
@@ -627,12 +661,10 @@ travel_danger_events.6010 = { #Siege
 					is_at_war_with = scope:siege_owner
 				}
 				modifier = {
-					exists = scope:siege_commander
 					add = 5
 					has_any_bad_relationship_with_character_trigger = { CHARACTER = scope:siege_commander }
 				}
 				opinion_modifier = {
-					trigger = { exists = scope:siege_commander }
 					who = scope:siege_commander
 					opinion_target = root
 					multiplier = 0.5
@@ -673,11 +705,11 @@ travel_danger_events.6010 = { #Siege
 					min = -49
 				}
 				modifier = { add = current_travel_plan.num_entourage_characters }
-				modifier = {
+				modifier = { 
 					add = {
 						value = current_travel_plan.travel_safety
 						divide = 20
-					}
+					} 
 				}
 				modifier = {
 					add = {
@@ -727,6 +759,10 @@ travel_danger_events.6010 = { #Siege
 										}
 										modifier = {
 											add = 10
+											has_court_position = akolouthos_court_position
+										}
+										modifier = {
+											add = 10
 											is_knight_of = root
 										}
 									}
@@ -766,9 +802,9 @@ travel_danger_events.6010 = { #Siege
 			target = scope:soldier
 			gold = medium_gold_value
 		}
-		add_to_entourage_court_and_activity_effect = {
-			CHAR_TO_ADD = scope:soldier
-			NEW_COURT_OWNER = root
+		add_to_entourage_court_and_activity_effect = { 
+			CHAR_TO_ADD = scope:soldier 
+			NEW_COURT_OWNER = root 
 		}
 		stress_impact = {
 			greedy = medium_stress_impact_gain
@@ -919,7 +955,7 @@ travel_danger_events.6011 = { #Battal
 			}
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 	}
@@ -928,10 +964,7 @@ travel_danger_events.6011 = { #Battal
 		mp_delay_travel_plan = { DAYS = 90 }
 		location = {
 			ordered_army_in_location = {
-				limit = {
-					is_army_in_combat = yes
-					exists = army_commander
-				}
+				limit = { is_army_in_combat = yes }
 				order_by = army_size
 				save_scope_as = battle_army_1
 				army_owner = { save_scope_as = battle_owner_1 }
@@ -940,7 +973,6 @@ travel_danger_events.6011 = { #Battal
 			ordered_army_in_location = {
 				limit = {
 					is_army_in_combat = yes
-					exists = army_commander
 					army_owner ?= {
 						OR = {
 							is_at_war_with = scope:battle_owner_1
@@ -968,7 +1000,7 @@ travel_danger_events.6011 = { #Battal
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 		traveler_danger_xp_effect = {
@@ -1052,7 +1084,7 @@ travel_danger_events.6011 = { #Battal
 				factor = 0
 				has_trait = brave
 			}
-		}
+		}	
 	}
 
 	option = { #Impress
@@ -1205,11 +1237,11 @@ travel_danger_events.6011 = { #Battal
 					min = -49
 				}
 				modifier = { add = current_travel_plan.num_entourage_characters }
-				modifier = {
+				modifier = { 
 					add = {
 						value = current_travel_plan.travel_safety
 						divide = 20
-					}
+					} 
 				}
 				modifier = {
 					add = {
@@ -1262,6 +1294,10 @@ travel_danger_events.6011 = { #Battal
 									}
 									modifier = {
 										add = 10
+										has_court_position = akolouthos_court_position
+									}
+									modifier = {
+										add = 10
 										is_knight_of = root
 									}
 								}
@@ -1298,9 +1334,9 @@ travel_danger_events.6011 = { #Battal
 			target = scope:soldier
 			gold = medium_gold_value
 		}
-		add_to_entourage_court_and_activity_effect = {
-			CHAR_TO_ADD = scope:soldier
-			NEW_COURT_OWNER = root
+		add_to_entourage_court_and_activity_effect = { 
+			CHAR_TO_ADD = scope:soldier 
+			NEW_COURT_OWNER = root 
 		}
 		stress_impact = {
 			greedy = medium_stress_impact_gain
@@ -1422,7 +1458,7 @@ travel_danger_events.6012 = { #Army
 			}
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 	}
@@ -1431,10 +1467,6 @@ travel_danger_events.6012 = { #Army
 		mp_delay_travel_plan = { DAYS = 90 }
 		location = {
 			ordered_army_in_location = {
-				limit = {
-					NOT = { army_owner = root }
-					exists = army_commander
-				}
 				order_by = army_size
 				save_scope_as = army
 				army_owner = { save_scope_as = army_owner }
@@ -1444,7 +1476,7 @@ travel_danger_events.6012 = { #Army
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 		traveler_danger_xp_effect = {
@@ -1509,7 +1541,7 @@ travel_danger_events.6012 = { #Army
 				factor = 0
 				has_trait = brave
 			}
-		}
+		}	
 	}
 
 	option = { #Impress
@@ -1621,11 +1653,11 @@ travel_danger_events.6012 = { #Army
 					min = -49
 				}
 				modifier = { add = current_travel_plan.num_entourage_characters }
-				modifier = {
+				modifier = { 
 					add = {
 						value = current_travel_plan.travel_safety
 						divide = 20
-					}
+					} 
 				}
 				modifier = {
 					add = {
@@ -1657,7 +1689,7 @@ travel_danger_events.6012 = { #Army
 				else = { remove_short_term_gold = minor_gold_value }
 				if = {
 					limit = {
-						current_travel_plan = {
+						current_travel_plan = { 
 							any_entourage_character = {
 								is_adult = yes
 							}
@@ -1676,6 +1708,10 @@ travel_danger_events.6012 = { #Army
 										modifier = {
 											add = 10
 											has_court_position = bodyguard_court_position
+										}
+										modifier = {
+											add = 10
+											has_court_position = akolouthos_court_position
 										}
 										modifier = {
 											add = 10
@@ -1716,9 +1752,9 @@ travel_danger_events.6012 = { #Army
 			target = scope:soldier
 			gold = medium_gold_value
 		}
-		add_to_entourage_court_and_activity_effect = {
-			CHAR_TO_ADD = scope:soldier
-			NEW_COURT_OWNER = root
+		add_to_entourage_court_and_activity_effect = { 
+			CHAR_TO_ADD = scope:soldier 
+			NEW_COURT_OWNER = root 
 		}
 		stress_impact = {
 			greedy = medium_stress_impact_gain
@@ -1827,10 +1863,9 @@ travel_danger_events.6013 = { #Occupation
 				barony.barony_controller ?= root
 				any_army_in_location = { army_owner = root }
 			}
-			any_army_in_location = { exists = army_commander }
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 	}
@@ -1855,7 +1890,7 @@ travel_danger_events.6013 = { #Occupation
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 		traveler_danger_xp_effect = {
@@ -1920,7 +1955,7 @@ travel_danger_events.6013 = { #Occupation
 				factor = 0
 				has_trait = brave
 			}
-		}
+		}	
 	}
 
 	option = { #Impress
@@ -2028,11 +2063,11 @@ travel_danger_events.6013 = { #Occupation
 					min = -49
 				}
 				modifier = { add = current_travel_plan.num_entourage_characters }
-				modifier = {
+				modifier = { 
 					add = {
 						value = current_travel_plan.travel_safety
 						divide = 20
-					}
+					} 
 				}
 				modifier = {
 					add = {
@@ -2086,6 +2121,10 @@ travel_danger_events.6013 = { #Occupation
 										}
 										modifier = {
 											add = 10
+											has_court_position = akolouthos_court_position
+										}
+										modifier = {
+											add = 10
 											is_knight_of = root
 										}
 									}
@@ -2123,9 +2162,9 @@ travel_danger_events.6013 = { #Occupation
 			target = scope:soldier
 			gold = medium_gold_value
 		}
-		add_to_entourage_court_and_activity_effect = {
-			CHAR_TO_ADD = scope:soldier
-			NEW_COURT_OWNER = root
+		add_to_entourage_court_and_activity_effect = { 
+			CHAR_TO_ADD = scope:soldier 
+			NEW_COURT_OWNER = root 
 		}
 		stress_impact = {
 			greedy = medium_stress_impact_gain
@@ -2226,7 +2265,7 @@ travel_danger_events.6020 = { #Craig
 			}
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 		modifier = {
@@ -2245,7 +2284,7 @@ travel_danger_events.6020 = { #Craig
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 			random_entourage_character = {
 				weight = {
@@ -2300,11 +2339,11 @@ travel_danger_events.6020 = { #Craig
 	}
 
 	option = { #CRAIG
-		name = travel_danger_events.6020.a
+		name = travel_danger_events.6020.a	
 	}
 
 	after = {
-		mp_resume_travel_plan = yes
+		mp_resume_travel_plan = yes	
 	}
 }
 
@@ -2342,8 +2381,11 @@ travel_danger_events.6030 = { #Spoiled food
 				NOT = { this = root }
 			}
 		}
+		location = {
+			is_sea_province = no
+		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 		modifier = { #Less likely if you have a logistician
@@ -2384,13 +2426,16 @@ travel_danger_events.6030 = { #Spoiled food
 				order_by = learning
 				save_scope_as = highest_learning_entourage_member
 			}
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
 	}
 
 	option = { #Eat
 		name = travel_danger_events.6030.a
+		domicile ?= {
+			change_provisions = minor_provisions_loss
+		}
 		if = {
 			limit = {
 				NOT = { has_trait = ill }
@@ -2601,6 +2646,9 @@ travel_danger_events.6030 = { #Spoiled food
 							add = 20
 						}
 						min = 1
+						domicile ?= {
+							change_provisions = minor_provisions_loss
+						}
 					}
 					5 = { # Poison self
 						desc = travel_danger_events.6030.b.critical
@@ -2621,6 +2669,9 @@ travel_danger_events.6030 = { #Spoiled food
 						}
 						root = {
 							contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = yes }
+							domicile ?= {
+								change_provisions = medium_provisions_loss
+							}
 						}
 					}
 					1 = { # Poison self real bad
@@ -2660,6 +2711,9 @@ travel_danger_events.6030 = { #Spoiled food
 						}
 						root = {
 							death = { death_reason = death_poisonous_forage }
+							domicile ?= {
+								change_provisions = medium_provisions_loss
+							}
 						}
 					}
 				}
@@ -2785,6 +2839,9 @@ travel_danger_events.6030 = { #Spoiled food
 						add = 20
 					}
 					min = 1
+					domicile ?= {
+						change_provisions = minor_provisions_loss
+					}
 				}
 				5 = { # Poison self
 					desc = travel_danger_events.6030.b.critical
@@ -2805,6 +2862,9 @@ travel_danger_events.6030 = { #Spoiled food
 					}
 
 					contract_disease_effect = { DISEASE = ill TREATMENT_EVENT = yes }
+					domicile ?= {
+						change_provisions = medium_provisions_loss
+					}
 				}
 				1 = { # Poison self real bad
 					desc = travel_danger_events.6030.b.death
@@ -2842,6 +2902,9 @@ travel_danger_events.6030 = { #Spoiled food
 						add = -2
 					}
 					death = { death_reason = death_poisonous_forage }
+					domicile ?= {
+						change_provisions = medium_provisions_loss
+					}
 				}
 			}
 		}
@@ -2859,6 +2922,9 @@ travel_danger_events.6030 = { #Spoiled food
 		add_prestige = minor_prestige_loss
 		trigger = {
 			is_location_valid_for_travel_event_on_land = yes #No one to steal from at sea
+		}
+		domicile ?= {
+			change_provisions = minor_provisions_loss
 		}
 		if = {
 			limit = {
@@ -2907,6 +2973,10 @@ travel_danger_events.6030 = { #Spoiled food
 								}
 								modifier = {
 									add = 10
+									has_court_position = akolouthos_court_position
+								}
+								modifier = {
+									add = 10
 									is_knight_of = root
 								}
 							}
@@ -2933,17 +3003,18 @@ travel_danger_events.6030 = { #Spoiled food
 				ai_energy = -0.5
 				ai_honor = -0.5
 			}
+			modifier = {
+				prestige <= minor_prestige_value
+				factor = 0
+			}
 		}
 	}
 
 	after = {
-		mp_resume_travel_plan = yes
-		if = {
-			limit = { is_alive = yes }
-			traveler_danger_xp_effect = {
-				MIN = 3
-				MAX = 6
-			}
+		mp_resume_travel_plan = yes	
+		traveler_danger_xp_effect = {
+			MIN = 3
+			MAX = 6
 		}
 	}
 }
@@ -3024,7 +3095,7 @@ travel_danger_events.6040 = { #Disease
 			}
 		}
 	}
-
+	
 	weight_multiplier = {
 		base = 1
 	}
@@ -3034,10 +3105,10 @@ travel_danger_events.6040 = { #Disease
 		current_travel_plan = {
 			#Save travel leader
 			travel_leader ?= { save_scope_as = travel_leader }
-			#Save destination scope
+			#Save destination scope 
 			next_destination_province = { save_scope_as = destination }
 		}
-		if = { #add a physician if you have one
+		if = { #add a physician if you have one 
 			limit = { court_physician_available_trigger = yes }
 			save_court_physician_as_effect = { SCOPE_NAME = physician }
 		}
@@ -3091,16 +3162,17 @@ travel_danger_events.6040 = { #Disease
 		trigger = {
 			NOT = { current_travel_plan.next_destination_province = root.capital_province }
 		}
-		current_travel_plan = {
-			#cancel_travel_plan = yes
-			reroute_to_home = yes
-		}
+		current_travel_plan = { cancel_travel_plan = yes }
 		ai_chance = {
 			base = 25
 			ai_value_modifier = {
 				ai_boldness = 0.5
 				ai_energy = -0.5
 				ai_rationality = -0.5
+			}
+			modifier = {
+				factor = 0
+				is_landless_adventurer = yes
 			}
 		}
 	}
@@ -3114,7 +3186,7 @@ travel_danger_events.6040 = { #Disease
 			}
 		}
 		show_as_unavailable = { always = yes }
-		#safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root } #This will be taken care by contract_disease_effect
+		safe_disease_treatment_effect = { PATIENT = root TREATMENT_PICKER = root }
 		ai_chance = {
 			base = 500
 		}
@@ -3130,11 +3202,15 @@ travel_danger_events.6040 = { #Disease
 				ai_energy = -0.5
 				ai_rationality = -0.5
 			}
+			modifier = {
+				add = 100
+				is_landless_adventurer = yes
+			}
 		}
 	}
 
 	after = {
-		mp_resume_travel_plan = yes
+		mp_resume_travel_plan = yes	
 	}
 }
 

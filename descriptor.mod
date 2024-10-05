@@ -1,3 +1,3 @@
-version="0.2.0"
+version="0.3.0"
 name="CK3 Fixes"
-supported_version="1.12.*"
+supported_version="1.13.*"
