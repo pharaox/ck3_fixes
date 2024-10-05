@@ -113,7 +113,6 @@ siege.0001 = {
 		every_in_list = {
 			list = occupied_baronies
 			limit = {
-				# FIX: Revert to logic from 1.12
 				exists = holder
 				save_temporary_scope_as = list_barony
 				holder = { capital_barony = { this = scope:list_barony } }
@@ -184,7 +183,7 @@ siege.0001 = {
 				}
 				# Less likely to capture the estate owner themselves
 				modifier = {
-					scope:estate_owner ?= this # FIX
+					scope:estate_owner ?= this
 					add = -10
 				}
 				# If there is an estate, Watchtowers and Guardhouses make captures less likely

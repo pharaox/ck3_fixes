@@ -3645,6 +3645,7 @@ scripted_trigger laamp_base_contract_schemes_0551_suitable_courtier_to_challenge
 scripted_effect laamp_base_contract_schemes_0551_process_out_overlapping_candidacies_effect = {
 	if = {
 		limit = {
+			exists = scope:$SKILL_2$_candidate
 			this = scope:$SKILL_2$_candidate
 			$SKILL_1$ >= $SKILL_2$
 		}
@@ -3652,6 +3653,7 @@ scripted_effect laamp_base_contract_schemes_0551_process_out_overlapping_candida
 	}
 	if = {
 		limit = {
+			exists = scope:$SKILL_3$_candidate
 			this = scope:$SKILL_3$_candidate
 			$SKILL_1$ >= $SKILL_3$
 		}
@@ -3659,6 +3661,7 @@ scripted_effect laamp_base_contract_schemes_0551_process_out_overlapping_candida
 	}
 	if = {
 		limit = {
+			exists = scope:$SKILL_4$_candidate
 			this = scope:$SKILL_4$_candidate
 			$SKILL_1$ >= $SKILL_4$
 		}
@@ -3666,6 +3669,7 @@ scripted_effect laamp_base_contract_schemes_0551_process_out_overlapping_candida
 	}
 	if = {
 		limit = {
+			exists = scope:$SKILL_5$_candidate
 			this = scope:$SKILL_5$_candidate
 			$SKILL_1$ >= $SKILL_5$
 		}
@@ -3673,6 +3677,7 @@ scripted_effect laamp_base_contract_schemes_0551_process_out_overlapping_candida
 	}
 	if = {
 		limit = {
+			exists = scope:$SKILL_6$_candidate
 			this = scope:$SKILL_6$_candidate
 			$SKILL_1$ >= $SKILL_6$
 		}
@@ -11594,7 +11599,7 @@ laamp_base_contract_schemes.2002 = {
 		# Employer outcome.
 		scope:employer = {
 			add_gold = {
-				value = prev.task_contract_taker.task_contract_success_gold_gain_full_value
+				value = scope:scheme.task_contract.task_contract_taker.task_contract_success_gold_gain_full_value
 				multiply = 2
 			}
 		}
