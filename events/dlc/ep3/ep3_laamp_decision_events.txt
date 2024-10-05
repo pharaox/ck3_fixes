@@ -3513,7 +3513,7 @@ ep3_laamp_decision_event.1010 = {
 					value = domicile.max_provisions
 					subtract = domicile.provisions
 					#Now we have the missing provisions value
-					multiply = 0.05
+					multiply = 0.03 # REBALANCE (0.6)
 					round = yes
 				}
 			}
