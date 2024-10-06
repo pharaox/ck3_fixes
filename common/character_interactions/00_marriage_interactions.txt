@@ -882,8 +882,11 @@ arrange_marriage_interaction = {
 				limit = {
 					exists = scope:secondary_actor
 					scope:actor = scope:secondary_actor
-					is_female = yes
-					is_ai = no
+					# FIX: Use correct scope
+					scope:actor = {
+						is_female = yes
+						is_ai = no
+					}
 				}
 				always = yes
 			}
