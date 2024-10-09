@@ -4226,10 +4226,12 @@ divorce_character_house_head_interaction = {
 	}
 
 	on_decline = {
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = divorce_character_rel_head_interaction_decline_notification
-			right_icon = scope:actor.house.house_head
+		scope:actor = { # FIX
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = divorce_character_rel_head_interaction_decline_notification
+				right_icon = scope:actor.house.house_head
+			}
 		}
 
 		# If we're a clan this interaction affects unity
@@ -4590,11 +4592,13 @@ divorce_character_rel_head_interaction = {
 	}
 
 	on_decline = {
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = divorce_character_rel_head_interaction_decline_notification
+		scope:actor = { # FIX
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = divorce_character_rel_head_interaction_decline_notification
 
-			right_icon = scope:actor.faith.religious_head
+				right_icon = scope:actor.faith.religious_head
+			}
 		}
 
 		# If we're a clan this interaction affects unity
@@ -5093,11 +5097,13 @@ divorce_character_dynast_request_rel_head_interaction = {
 	}
 
 	on_decline = {
-		send_interface_toast = {
-			type = event_toast_effect_bad
-			title = divorce_character_dynast_request_rel_head_interaction_decline_notification
+		scope:actor = { # FIX
+			send_interface_toast = {
+				type = event_toast_effect_bad
+				title = divorce_character_dynast_request_rel_head_interaction_decline_notification
 
-			right_icon = scope:actor.faith.religious_head
+				right_icon = scope:actor.faith.religious_head
+			}
 		}
 	}
 	

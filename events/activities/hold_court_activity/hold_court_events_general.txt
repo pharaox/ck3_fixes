@@ -1863,7 +1863,7 @@ hold_court.3030 = {
 		roles = {
 			scope:different_culture_peasant = {
 				group = petitioners_group
-				animation = bed
+				animation = beg # FIX
 			}
 		}
 	}
@@ -19961,7 +19961,7 @@ hold_court.8142 = { # Event on puppy adoption
 	override_background = { reference = throne_room }
 	left_portrait = {
 		character = scope:pup_house_ruler
-		animation = happy
+		animation = happiness # FIX
 	}
 
 	immediate = {

@@ -19587,7 +19587,7 @@ ep3_laamp_decision_event.1102 = {
 			}
 			animation = prayer
 		}
-		animation = zealous
+		animation = personality_zealous # FIX
 	}
 
 	immediate = {
@@ -19662,7 +19662,7 @@ ep3_laamp_decision_event.1103 = {
 			trigger = {
 				always = yes
 			}
-			animation = zealous
+			animation = personality_zealous # FIX
 		}
 	}
 

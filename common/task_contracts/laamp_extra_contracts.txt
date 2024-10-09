@@ -4609,7 +4609,7 @@ laamp_help_train_commanders_contract = {
 				}
 			}
 		}
-		success_standard {
+		success_standard = { # FIX
 			effect = {
 				save_scope_value_as = { name = extra_reward value = flag:no }
 				save_scope_as = task_contract
@@ -4835,7 +4835,7 @@ laamp_help_find_secrets_contract = {
 	}
 
 	task_contract_reward = {
-		success_standard {
+		success_standard = { # FIX
 			effect = {
 				task_contract_taker = { play_sound_effect = "event:/DLC/EP3/SFX/UI/Contracts/ep3_ui_contracts_success_on_contract" }
 				save_scope_value_as = { name = extra_reward value = flag:no }
