@@ -8143,6 +8143,8 @@ ep3_laamp_decision_event.1030 = {
 								root = { is_attracted_to_gender_of = prev } #Prev is the spouse scope
 								#They might want to marry us
 								is_attracted_to_gender_of = root
+								# FIX Avoid old characters
+								age <= 40
 							}
 							save_scope_as = laamp_spouse_material
 						}
@@ -8159,6 +8161,7 @@ ep3_laamp_decision_event.1030 = {
 								template = generic_peasant_character
 								location = scope:visiting_location
 								dynasty = none
+								age = { 18 40 } # FIX Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8177,6 +8180,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = male
+								age = { 18 40 } # FIX Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8194,6 +8198,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = female
+								age = { 18 40 } # FIX Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
