@@ -52,41 +52,32 @@ any_laamp_portion_at_sea_trigger = {
 }
 
 character_is_valid_for_harrying_of_the_north_trigger = {
+	title:k_england.holder ?= { owns_story_of_type = story_cycle_harrying_of_the_north }
 	trigger_if = {
-		limit = { 
-			title:k_england = { is_title_created = yes } #Unop: To not flood logs when the title is not created
-			exists = title:k_england.holder # FIX: Also ensure the title holder exists
+		limit = { is_ruler = yes }
+		OR = {
+			this = title:k_england.holder
+			any_liege_or_above = { this = title:k_england.holder }
 		}
-		title:k_england.holder = { owns_story_of_type = story_cycle_harrying_of_the_north }
-		trigger_if = {
-			limit = { is_ruler = yes }
-			OR = {
-				this = title:k_england.holder
-				any_liege_or_above = { this = title:k_england.holder }
-			}
-		}
-		trigger_else = {
-			domicile ?= {
-				domicile_location = {
-					county ?= {
-						holder = {
-							OR = {
-								this = title:k_england.holder
-								any_liege_or_above = { this = title:k_england.holder }
-							}
+	}
+	trigger_else = {
+		domicile ?= {
+			domicile_location = {
+				county ?= {
+					holder = {
+						OR = {
+							this = title:k_england.holder
+							any_liege_or_above = { this = title:k_england.holder }
 						}
 					}
 				}
 			}
 		}
-		OR = {
-			character_is_valid_anglo_saxon_for_harrying_of_the_north_trigger = yes
-			character_is_valid_norman_for_harrying_of_the_north_trigger = yes
-		}	
 	}
-	trigger_else = {
-		always = no
-	}
+	OR = {
+		character_is_valid_anglo_saxon_for_harrying_of_the_north_trigger = yes
+		character_is_valid_norman_for_harrying_of_the_north_trigger = yes
+	}	
 }
 
 character_is_valid_anglo_saxon_for_harrying_of_the_north_trigger = {
@@ -138,6 +129,18 @@ disable_interaction_for_hasan_trigger = {
 			scope:recipient = { owns_story_of_type = story_hasan }
 		}
 	}
+}
+
+laamp_request_likely_marriable_woman_trigger = {
+	is_female = yes
+	is_adult = yes
+	can_marry_trigger = yes
+}
+
+laamp_request_likely_marriable_man_trigger = {
+	is_male = yes
+	is_adult = yes
+	can_marry_trigger = yes
 }
 
 ##################################################
