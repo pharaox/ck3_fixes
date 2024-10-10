@@ -2692,7 +2692,7 @@ scripted_trigger 1010_payment_child_trigger = {
 	NOT = { is_primary_heir_of = root }
 	save_temporary_scope_as = child_check
 	root.primary_title = {
-		place_in_line_of_succession >= {
+		place_in_line_of_succession = {
 			target = scope:child_check
 			value >= 3
 		}
@@ -10264,9 +10264,9 @@ ep3_laamp_decision_event.1033 = {
 							    		#Create a victim to kill
 								    	create_character = {
 											template = generic_peasant_character
-											culture = scope:visiting_location.location.county.culture
-											faith = scope:visiting_location.location.county.faith
-											location = scope:visiting_location.location
+											culture = scope:visiting_location.culture
+											faith = scope:visiting_location.faith
+											location = scope:visiting_location
 											after_creation = { set_to_lowborn = yes }
 											save_scope_as = 1030_previous_victim
 										}
@@ -16321,7 +16321,7 @@ ep3_laamp_decision_event.1053 = {
 			random_pool_character = {
 				province = scope:visiting_location
 				limit = { 1053_random_martial_character_trigger = yes }
-				save_scope_as = laamp_talented_guard # FIX: Save correct scope
+				save_scope_as = laamp_talented_guard # Fix: Save correct scope
 			}
 			#Otherwise create a suiting talented guard
 			if = {
@@ -19598,7 +19598,7 @@ ep3_laamp_decision_event.1102 = {
 			}
 			animation = prayer
 		}
-		animation = personality_zealous # FIX
+		animation = personality_zealous
 	}
 
 	immediate = {
@@ -19676,7 +19676,7 @@ ep3_laamp_decision_event.1103 = {
 			trigger = {
 				always = yes
 			}
-			animation = personality_zealous # FIX
+			animation = personality_zealous
 		}
 	}
 
@@ -20872,7 +20872,7 @@ ep3_laamp_decision_event.1140 = { #city pays dividend
 				value = 0
 				add = {
 					value = 10
-					multiply = scope:city_location.barony.combined_building_level
+					multiply = scope:city_location.combined_building_level
 				}
 				add = {
 					value = 8
