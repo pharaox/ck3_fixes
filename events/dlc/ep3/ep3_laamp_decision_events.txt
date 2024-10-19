@@ -13948,6 +13948,11 @@ ep3_laamp_decision_event.1043 = {
 				}
 			}
 		}
+		# FIX Limit this to same religion
+		trigger = {
+			faith.religion = scope:visiting_location.faith.religion
+		}
+		show_as_unavailable = { always = yes }
 		#Pay gold, feel more pious
 		pay_short_term_gold = {
 			target = scope:laamp_clergy_character
@@ -14007,6 +14012,8 @@ ep3_laamp_decision_event.1043 = {
 	option = {
 		name = ep3_laamp_decision_event.1043.b
 		trigger = {
+			# FIX Limit this to same religion
+			faith.religion = scope:visiting_location.faith.religion
 			NOR = { 
 				has_character_modifier = laamp_decision_church_blessing_stress_loss_modifier
 				has_character_modifier = laamp_decision_church_blessing_stress_gain_modifier
