@@ -3,7 +3,7 @@ on_travel_plan_movement = {
 	# It should be more likely to fire a danger event if it's valid for the given province
 	trigger = {
 		is_playable_character = yes
-		is_adult = yes 
+		is_adult = yes
 	}
 
 	on_actions = {
@@ -59,10 +59,10 @@ on_travel_plan_movement = {
 				is_on_a_pilgrimage_trigger = yes
 			}
 			pilgrimages_track_encountered_cultures_effect = yes
-		}		
+		}
 		# We change your Legend if you travel through somewhere relevant
 		if = {
-			limit = {	
+			limit = {
 				current_travel_plan.current_location = {
 					has_any_point_of_interest_flag = yes
 				}
@@ -114,7 +114,7 @@ on_travel_plan_movement = {
 					}
 					add_to_variable_list = {
 						name = cultural_ambassador_culture_list
-						target = current_location.culture 
+						target = current_location.culture
 					}
 				}
 				else_if = {
@@ -122,14 +122,14 @@ on_travel_plan_movement = {
 						NOR = {
 							is_target_in_variable_list = {
 								name = cultural_ambassador_culture_list
-								target = current_location.culture 
+								target = current_location.culture
 							}
 							current_location.culture = root.culture
 						}
 					}
 					add_to_variable_list = {
 						name = cultural_ambassador_culture_list
-						target = current_location.culture 
+						target = current_location.culture
 					}
 					current_location = {
 						culture = { save_scope_as = current_culture }
@@ -299,7 +299,7 @@ on_travel_plan_movement = {
 			add_gold = adventurers_make_local_deals_option_value
 			add_to_variable_list = {
 				name = haggle_provinces
-				target = root.current_travel_plan.current_location 
+				target = root.current_travel_plan.current_location
 			}
 		}
 		if = {
@@ -404,7 +404,7 @@ on_travel_plan_movement = {
 					type = send_interface_message_good
 					title = adventurers_proselytize_zealously_option.title
 					left_icon = scope:wanderer_to_convert
-					add_piety = minor_piety_value
+					add_piety = miniscule_piety_value
 					scope:wanderer_to_convert = {
 						set_character_faith = root.faith
 					}
@@ -552,7 +552,7 @@ travel_danger_events_on_action = {
 		100 = travel_events.4020 # Danger! Strong believers harass your caravan and demand payment
 		100 = travel_events.4003 # You encounter vikings at sea
 		250 = bp1_yearly.0100 # You are caught in a storm and a rival's property is the only shelter
-		
+
 		# Laamp Travel Danger Events
 		350 = ep3_laamp_flavour_ewan.4001	# Bandits! - Bandit raid.
 		350 = ep3_laamp_flavour_ewan.4021	# Parched - Difficulty finding water.
@@ -593,7 +593,7 @@ travel_events_on_action = {
 				add = 15 # AI counts aren't particularly important
 			}
 		}
-		100 = 0 
+		100 = 0
 		5 = travel_events.1000 #Peasant with no shoes
 		10 = travel_events.2000 #Good omen? - Encounter a duck
 		100 = travel_events.2002 #Crossing an ant path - Ignore or don't ignore your guide
@@ -658,7 +658,7 @@ travel_events_on_action = {
 		100 = travel_events.4040 # You meet a xenophile character who wants to learn about your culture
 		100 = tour_travel.3010 # Local saint shrine
 		100 = travel_events.4050 # hostage/ward/different culture courtier acts as cultural mediator
-		
+
 		#Cultural Tradition events
 		100 = travel_events.1200 #Friendly People
 		100 = travel_events.1201 #Chivalry
@@ -1053,14 +1053,14 @@ on_travel_plan_complete = {
 							exists = current_travel_plan.var:travel_plan_provinces_traversed
 							add = {
 								value = current_travel_plan.var:travel_plan_provinces_traversed
-								divide = 5 
+								divide = 5
 							}
 						}
 						if = {
 							limit = {
 								NOT = { has_trait = lifestyle_traveler }
 							}
-							add_trait = lifestyle_traveler 
+							add_trait = lifestyle_traveler
 						}
 					}
 					80 = {}
@@ -1159,12 +1159,18 @@ on_travel_plan_abort = {
 			send_interface_toast = {
 				type = event_toast_effect_neutral
 				title = petition_liege_costs_refunded
-				left_icon = root 
+				left_icon = root
 				remove_decision_cooldown = petition_liege_decision
-				# refund prestige cost
-				add_prestige = standard_activity_cost
+				# refund prestige and influence cost
+				if = {
+					limit = { petition_liege_admin_valid_trigger = yes }
+					change_influence_no_experience = standard_activity_cost
+				}
+				else = {
+					add_prestige_no_experience = standard_activity_cost
+				}
 			}
-			# remove variables and flags 
+			# remove variables and flags
 			petition_liege_variable_cleanup_effect = yes
 		}
 	}
@@ -1186,12 +1192,18 @@ on_travel_plan_cancel = {
 			send_interface_toast = {
 				type = event_toast_effect_neutral
 				title = petition_liege_costs_refunded
-				left_icon = root 
+				left_icon = root
 				remove_decision_cooldown = petition_liege_decision
-				# refund prestige cost
-				add_prestige = standard_activity_cost
+				# refund prestige and influence cost
+				if = {
+					limit = { petition_liege_admin_valid_trigger = yes }
+					change_influence_no_experience = standard_activity_cost
+				}
+				else = {
+					add_prestige_no_experience = standard_activity_cost
+				}
 			}
-			# remove variables and flags 
+			# remove variables and flags
 			petition_liege_variable_cleanup_effect = yes
 		}
 		if = {
@@ -1201,7 +1213,7 @@ on_travel_plan_cancel = {
 			send_interface_toast = {
 				type = event_toast_effect_neutral
 				title = pay_homage_costs_refunded
-				left_icon = root 
+				left_icon = root
 				# Remove variable preventing you from paying homage again
 				if = {
 					limit = {
@@ -1267,7 +1279,7 @@ on_travel_activity_complete = {
 # If the travel is due to an activity and the activity is invalidated (not completed), this will trigger.
 # After this on_action, the travel plan will be rerouted home.
 on_travel_activity_invalidated = {
-	
+
 }
 
 # If the travel is due to an activity and the activity has started while this travel plan is still underway, this
@@ -1328,7 +1340,7 @@ on_visited_ep3_monument = {
 #Used in the debug interaction debug_move_domicile_interaction
 on_travel_relocation_start = {
 	effect = {
-		# FIX Disable this, the correct logic is in ep3_contract_event.0002 
+		# FIX Disable this, the correct logic is in ep3_contract_event.0002
 		#every_courtier_or_guest = { #take everyone you have with you
 		#	limit = {
 		#		NOT = { exists = current_travel_plan }
@@ -1355,7 +1367,7 @@ travel_laamps_provisions_on_action = {
 	events = {
 		ep3_laamps_provisions.1080
 	}
-	
+
 	random_events = {
 		chance_of_no_event = {
 			value = 10

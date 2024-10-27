@@ -117,7 +117,7 @@ start_murder_interaction = {
 				type = event_toast_effect_neutral
 				title = start_murder_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				# Success.
@@ -204,7 +204,7 @@ start_murder_interaction = {
 			}
 		}
 	}
-	
+
 	auto_accept = yes
 
 	# AI for murders is handled in event murder_scheme_maintenance.1, fired from the five_year_playable_pulse
@@ -219,7 +219,7 @@ start_abduct = {
 
 	scheme = abduct
 	ignores_pending_interaction_block = yes
-	
+
 	is_shown = {
 		scope:actor = {
 			OR = {
@@ -242,7 +242,7 @@ start_abduct = {
 			scope:recipient = { is_imprisoned_by = scope:actor }
 		}
 		#exists = scope:recipient.court_owner
-		
+
 		NAND = { # Game Rules!
 			has_game_rule = no_players_multiplayer_murder_schemes
 			scope:actor = {
@@ -252,7 +252,7 @@ start_abduct = {
 				is_ai = no
 			}
 		}
-		
+
 		NAND = {
 			has_game_rule = no_player_families_multiplayer_murder_schemes
 			scope:actor = {
@@ -346,7 +346,7 @@ start_abduct = {
 				type = event_toast_effect_neutral
 				title = start_abduct_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				# Success.
@@ -495,7 +495,7 @@ start_abduct = {
 			always = yes
 		}
 	}
-	
+
 	auto_accept = yes
 }
 
@@ -511,7 +511,7 @@ end_scheme = {
 			end_scheme = yes
 		}
 	}
-	
+
 	auto_accept = yes
 	ignores_pending_interaction_block = yes
 }
@@ -587,7 +587,7 @@ befriend_interaction = {
 				type = event_toast_effect_neutral
 				title = befriend_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				begin_scheme_basic_effect = {
@@ -647,7 +647,7 @@ befriend_interaction = {
 			}
 		}
 	}
-	
+
 	ai_potential = {
 		OR = {
 			has_perk = befriend_perk # Unlocked by the Befriend Perk
@@ -683,9 +683,9 @@ befriend_interaction = {
 			}
 		}
 	}
-	
+
 	auto_accept = yes
-	
+
 	ai_will_do = {
 		base = 50
 
@@ -762,7 +762,7 @@ befriend_interaction = {
 				}
 			}
 		}
-		
+
 		# Struggle
 		modifier = {
 			scope:actor = {
@@ -919,7 +919,7 @@ seduce_interaction = {
 
 	send_name = START_SCHEME
 	ignores_pending_interaction_block = yes
-	
+
 	ai_targets = {
 		ai_recipients = family
 		max = 2
@@ -927,7 +927,11 @@ seduce_interaction = {
 	ai_targets = {
 		ai_recipients = guests
 		ai_recipients = courtiers
+		max = 10
+	}
+	ai_targets = {
 		ai_recipients = neighboring_rulers
+		max = 5
 	}
 	ai_targets = {
 		ai_recipients = vassals
@@ -937,19 +941,19 @@ seduce_interaction = {
 		ai_recipients = peer_vassals
 		max = 5
 	}
-	
+
 	# We don't want this to grow ludicrously large in big realms
 	ai_targets = {
 		ai_recipients = realm_characters
 		max = 10
 	}
-	
+
 	ai_target_quick_trigger = {
 		adult = yes
 		attracted_to_owner = yes
 		owner_attracted = yes
 	}
-	ai_frequency = 12
+	ai_frequency = 24
 
 	is_shown = {
 		NOT = { scope:actor = scope:recipient }
@@ -1098,7 +1102,7 @@ seduce_interaction = {
 				type = event_toast_effect_neutral
 				title = seduce_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				begin_scheme_basic_effect = {
@@ -1119,7 +1123,7 @@ seduce_interaction = {
 			}
 		}
 	}
-	
+
 	ai_potential = {
 		is_adult = yes
 		NOR = {
@@ -1136,9 +1140,9 @@ seduce_interaction = {
 		}
 		might_cheat_on_every_partner_trigger = yes
 	}
-	
+
 	auto_accept = yes
-	
+
 	ai_will_do = {
 		base = 5
 
@@ -1149,14 +1153,14 @@ seduce_interaction = {
 				primary_spouse = { has_strong_hook = scope:actor }
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
 				has_focus = intrigue_temptation_focus
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
@@ -1166,7 +1170,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 25
 			exists = scope:actor.dynasty
@@ -1174,14 +1178,14 @@ seduce_interaction = {
 				has_dynasty_perk = fp1_adventure_legacy_2
 			}
 		}
-		
+
 		modifier = { # Focus on befriending if that's the path you've chosen
 			add = -50
 			scope:actor = {
 				has_perk = befriend_perk
 			}
 		}
-		
+
 		modifier = { # Non-lustful clergy tend to not seduce
 			add = -25
 			scope:actor = {
@@ -1195,7 +1199,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Seducing your unmarried courtiers is good for producing bastards, which the AI will want to do if they have few heirs
 			add = 10
 			scope:actor = {
@@ -1212,7 +1216,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 30
 			scope:actor = {
@@ -1233,7 +1237,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 25
 			scope:actor = {
@@ -1247,7 +1251,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
@@ -1255,7 +1259,7 @@ seduce_interaction = {
 				faith = { has_doctrine = tenet_divine_marriage }
 			}
 		}
-		
+
 		modifier = { # Seducing the spouse of your rival is good drama...
 			add = 25
 			scope:recipient = {
@@ -1268,7 +1272,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = -20
 			scope:actor = {
@@ -1284,7 +1288,7 @@ seduce_interaction = {
 				is_close_family_of = scope:actor
 			}
 		}
-		
+
 		modifier = { # Seducing someone's spouse is not a clever prospect for most characters, so lowering the attractiveness a bit
 			add = -20
 			scope:recipient = {
@@ -1300,7 +1304,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Try to avoid agressive seduction unless you're geared for it
 			add = -10
 			scope:actor = {
@@ -1314,7 +1318,7 @@ seduce_interaction = {
 				NOT = { is_pool_guest_of = scope:actor }
 			}
 		}
-		
+
 		# Struggle
 		modifier = {
 			scope:recipient = {
@@ -1420,7 +1424,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Try to avoid 0% success chance
 			factor = {
 				value = 0.1
@@ -1460,7 +1464,7 @@ seduce_interaction = {
 				is_lowborn = yes
 			}
 		}
-		
+
 		modifier = { # Barons tend to not seduce anyone landed above them
 			factor = 0.1
 			scope:actor = {
@@ -1486,7 +1490,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			factor = 0.2
 			scope:recipient = {
@@ -1496,7 +1500,7 @@ seduce_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { #
 			factor = 0.1
 			scope:recipient = {
@@ -1582,7 +1586,7 @@ court_interaction = {
 		scope:actor = { is_adult = yes }
 		scope:actor = { is_attracted_to_gender_of = scope:recipient }
 		scope:recipient = { is_attracted_to_gender_of = scope:actor }
-		
+
 		scope:actor = { # Some early filtering for the AI to focus it towards fruitful romance
 			trigger_if = {
 				limit = {
@@ -1715,7 +1719,7 @@ court_interaction = {
 				type = event_toast_effect_neutral
 				title = court_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				begin_scheme_basic_effect = {
@@ -1750,7 +1754,7 @@ court_interaction = {
 			}
 		}
 	}
-	
+
 	ai_potential = {
 		is_adult = yes
 		trigger_if = {
@@ -1783,14 +1787,14 @@ court_interaction = {
 			}
 		}
 	}
-	
+
 	auto_accept = yes
-	
+
 	ai_will_do = {
 		base = 0
-		
-		
-		
+
+
+
 		# Struggle
 		modifier = {
 			scope:actor = {
@@ -1833,7 +1837,7 @@ court_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Motivate AI's to use it on catalyst providers exclusively
 			add = -50
 			scope:actor = {
@@ -1876,7 +1880,7 @@ court_interaction = {
 			factor = 25
 			has_focus = martial_chivalry_focus
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
@@ -1886,7 +1890,7 @@ court_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = -50
 			scope:actor = {
@@ -1916,7 +1920,7 @@ court_interaction = {
 				has_trait = beauty_good
 			}
 		}
-		
+
 		modifier = { # Try to avoid 0% success chance
 			factor = {
 				value = 0.1
@@ -1939,7 +1943,7 @@ court_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			factor = 0.2
 			scope:recipient = {
@@ -1949,7 +1953,7 @@ court_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			factor = 0.1
 			scope:recipient = {
@@ -2026,7 +2030,7 @@ sway_interaction = {
 				type = event_toast_effect_neutral
 				title = sway_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				begin_scheme_basic_effect = {
@@ -2037,7 +2041,7 @@ sway_interaction = {
 			}
 		}
 	}
-	
+
 	ai_potential = {
 		primary_title.tier >= tier_county
 		NOR = {
@@ -2047,12 +2051,12 @@ sway_interaction = {
 			}
 		}
 	}
-	
+
 	auto_accept = yes
-	
+
 	ai_will_do = {
 		base = 10
-		
+
 		modifier = { # Prefer seducing if you've got the focus for it
 			add = -20
 			scope:actor = {
@@ -2139,8 +2143,8 @@ sway_interaction = {
 
 		modifier = {
 			factor = 2
-			scope:recipient = { 
-				is_a_faction_leader = yes 
+			scope:recipient = {
+				is_a_faction_leader = yes
 				is_vassal_of = scope:actor
 			}
 		}
@@ -2270,7 +2274,7 @@ sway_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Ignore rivals unless forgiving
 			factor = 0
 			scope:actor = {
@@ -2278,7 +2282,7 @@ sway_interaction = {
 				NOT = { has_trait = forgiving }
 			}
 		}
-		
+
 		modifier = { # Ignore non-councillor barons
 			factor = 0
 			scope:recipient = {
@@ -2286,7 +2290,7 @@ sway_interaction = {
 				is_councillor = no
 			}
 		}
-		
+
 		modifier = { # Ignore neighboring Kings+
 			factor = 0
 			scope:recipient = {
@@ -2367,7 +2371,7 @@ learn_language_interaction = {
 				type = event_toast_effect_neutral
 				title = learn_language_interaction_notification
 
-				left_icon = scope:actor					
+				left_icon = scope:actor
 				right_icon = scope:recipient
 
 				begin_scheme_basic_effect = {
@@ -2378,7 +2382,7 @@ learn_language_interaction = {
 			}
 		}
 	}
-	
+
 	ai_potential = {
 		primary_title.tier >= tier_county
 		NOR = {
@@ -2390,9 +2394,9 @@ learn_language_interaction = {
 			}
 		}
 	}
-	
+
 	auto_accept = yes
-	
+
 	ai_will_do = {
 		base = 0
 
@@ -2430,28 +2434,28 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Focus on befriending if that's the path you've chosen
 			add = -50
 			scope:actor = {
 				has_perk = befriend_perk
 			}
 		}
-		
+
 		modifier = { # Prefer seducing if you've got the focus for it
 			add = -20
 			scope:actor = {
 				has_focus = intrigue_temptation_focus
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
 				has_perk = open_minded_perk
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
@@ -2461,42 +2465,42 @@ learn_language_interaction = {
 			}
 			scope:actor.religion = scope:recipient.religion
 		}
-		
+
 		modifier = {
 			add = 25
 			scope:actor = {
 				has_trait = curious
 			}
 		}
-		
+
 		modifier = {
 			add = 50
 			scope:actor = {
 				is_adult = no
 			}
 		}
-		
+
 		modifier = {
 			add = 25
 			scope:recipient = {
 				has_relation_friend = scope:actor
 			}
 		}
-		
+
 		modifier = {
 			add = 25
 			scope:recipient = {
 				has_relation_lover = scope:actor
 			}
 		}
-		
+
 		modifier = {
 			add = 10
 			scope:recipient = {
 				has_relation_potential_friend = scope:actor
 			}
 		}
-		
+
 		modifier = {
 			add = 5
 			scope:recipient = {
@@ -2504,7 +2508,7 @@ learn_language_interaction = {
 				is_ruler = yes
 			}
 		}
-		
+
 		modifier = { # Muslims want to learn arabic
 			add = 25
 			scope:actor = {
@@ -2519,7 +2523,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Catholic clergy/pious people want to learn latin
 			add = 50
 			scope:actor = {
@@ -2539,7 +2543,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Catholic clergy/pious people want to learn Italian
 			add = 50
 			scope:actor = {
@@ -2559,7 +2563,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Clergy/pious people want to learn their HoF's language
 			add = 50
 			scope:actor = {
@@ -2572,7 +2576,7 @@ learn_language_interaction = {
 			}
 			scope:recipient = { knows_language_of_culture = scope:actor.faith.religious_head.culture }
 		}
-		
+
 		modifier = { # Coptic/Orthodox clergy/pious people want to learn greek
 			add = 50
 			scope:actor = {
@@ -2595,7 +2599,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = { # Nestorian clergy/pious people want to learn aramaic
 			add = 50
 			scope:actor = {
@@ -2615,7 +2619,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 20
 			scope:actor = {
@@ -2625,7 +2629,7 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			add = 20
 			scope:actor = {
@@ -2638,7 +2642,7 @@ learn_language_interaction = {
 				is_vassal_of = scope:actor
 			}
 		}
-		
+
 		modifier = {
 			add = 10
 			exists = scope:actor.capital_county
@@ -2646,7 +2650,7 @@ learn_language_interaction = {
 				has_same_culture_language = scope:actor.capital_county.culture
 			}
 		}
-		
+
 		modifier = {
 			add = 100
 			scope:actor.culture = {
@@ -2657,31 +2661,31 @@ learn_language_interaction = {
 				liege = scope:recipient
 			}
 		}
-		
+
 		modifier = {
 			factor = 2
 			scope:recipient = {
 				is_powerful_vassal_of = scope:actor
 			}
 		}
-		
+
 		modifier = {
 			factor = 2
 			scope:actor = {
 				learning >= 12
 			}
 		}
-		
+
 		modifier = {
 			factor = 0.5
 			scope:actor = {
 				learning <= 6
 			}
 		}
-		
+
 		modifier = {
 			factor = 0
-			
+
 			scope:actor.num_of_known_languages >= 5
 			scope:actor = {
 				NOR = {
@@ -2692,10 +2696,10 @@ learn_language_interaction = {
 				}
 			}
 		}
-		
+
 		modifier = {
 			factor = 0
-			
+
 			scope:actor.num_of_known_languages >= language_soft_cap
 		}
 	}

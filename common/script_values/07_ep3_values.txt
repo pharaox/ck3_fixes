@@ -236,7 +236,7 @@ estate_internal_building_high_cost_tier_6_value = {
 # Estate location modifier value
 estate_location_cost_modifier_value = {
 	value = 1
-	
+
 	if = { # Everything is a bit more expensive in the capital
 		limit = {
 			domicile.domicile_location = top_liege.capital_province
@@ -475,7 +475,7 @@ admin_title_troop_command_cost_value = {
 		format = "BASE_VALUE_FORMAT"
 		desc = "BASE_VALUE"
 	}
-	
+
 	if = { # Increase cost based on the total number of regiments - The first three regiments are not accounted for, we consider them a part of the base cost
 		limit = {
 			scope:recipient_title = {
@@ -736,11 +736,22 @@ ep3_laamp_chance_score_value = {
 		limit = { has_trait = physique_good }
 		add = 3
 	}
-	# Fame/Lifestyle/Commander
+	# Fame
 	every_trait_in_category = {
 		category = fame
+		limit = { root = { has_trait = prev } }
+		add = 3
+	}
+	# Lifestyle
+	every_trait_in_category = {
 		category = lifestyle
+		limit = { root = { has_trait = prev } }
+		add = 3
+	}
+	# Commander
+	every_trait_in_category = {
 		category = commander
+		limit = { root = { has_trait = prev } }
 		add = 3
 	}
 	# Education
@@ -858,7 +869,7 @@ ep3_hire_laamp_mercs_cost_value = {
 			scope:actor = {
 				every_character_war = {
 					limit = {
-						is_war_leader = scope:actor	
+						is_war_leader = scope:actor
 					}
 					add = 1
 				}
@@ -903,6 +914,15 @@ ep3_hire_laamp_mercs_payment_value = {
 			scope:laamp_temp ?= { has_perk = hard_rule_perk }
 		}
 		multiply = adventurer_hard_rule_contract_rewards_value
+	}
+	max = {
+		value = scope:employer.yearly_character_income
+		if = {
+			limit = {
+				scope:employer.gold > 0
+			}
+			add = scope:employer.gold
+		}
 	}
 }
 
@@ -1444,6 +1464,7 @@ governor_efficiency = {
 			}
 		}
 
+		# Lifestyle Perks
 		# Positions of Power Stewardship Perk
 		if = {
 			limit = { has_perk = positions_of_power_perk }
@@ -1451,6 +1472,17 @@ governor_efficiency = {
 				add = {
 					value = 5
 					desc = "[GetPerk('positions_of_power_perk').GetName(GetPlayer)]"
+				}
+				divide = 100
+			}
+		}
+		# Strict Organization Martial Perk
+		if = {
+			limit = { has_perk = strict_organization_perk }
+			add = {
+				add = {
+					value = 5
+					desc = "[GetPerk('strict_organization_perk').GetName(GetPlayer)]"
 				}
 				divide = 100
 			}
@@ -1590,7 +1622,7 @@ governor_efficiency = {
 			}
 			divide = 100
 		}
-		
+
 		# Schemes
 		add = {
 			add = {
@@ -1830,6 +1862,9 @@ appointment_score_major_loss_tt_value = {
 	multiply = scope:actor.appointment_score_interaction_multiplier_modifiers_value
 }
 
+appointment_non_preferred_gender_penalty_value = 0.8
+appointment_opposite_gender_penalty_value = 1
+
 admin_council_cost_value = {
 	add = {
 		add = {
@@ -1854,7 +1889,7 @@ admin_council_cost_value = {
 			desc = market_02_domicile_building
 		}
 	}
-	
+
 	# Cost reduction from lifestyles
 	if = {
 		limit = {
@@ -2313,7 +2348,10 @@ task_contract_success_gold_gain_full_value = {
 		}
 	}
 	## Plus change the last digit around slightly so the values look a little less robotic.
-	scope:gold_fuzz ?= { add = scope:gold_fuzz }
+	if = {
+		limit = { exists = scope:gold_fuzz }
+		add = scope:gold_fuzz
+	}
 	## And boost a bit further for exceptional rewards, so that they're never beneath the common rewards.
 	if = {
 		limit = { scope:gold_safety_margin ?= flag:yes }
@@ -2602,6 +2640,7 @@ laamp_base_2011_actual_surveyable_holdings_per_tier_value = {
 		limit = {
 			exists = holder
 			holder.highest_held_title_tier = tier_barony
+			NOT = { this = root.domicile.domicile_location.county } #Unop: Added the .county to prevent error: (left was 'landed_title', right was 'province')
 		}
 		add = 1
 	}
@@ -3303,7 +3342,7 @@ house_power_score = {
 					is_governor = yes
 					top_liege = house.house_head.top_liege
 				}
-				add = 0.4 # Let's add a multipler to the overall score for each governorship
+				add = 0.4 # Let's add a multiplier to the overall score for each governorship
 			}
 			desc = held_governoships_desc
 		}
@@ -3506,6 +3545,7 @@ ep3_governor_yearly_8150_total_count_value = {
 court_position_aptitude_traveling_friends_value = {
 	if = {
 		limit = {
+			has_character_flag = travelling_friend
 			liege ?= {
 				any_court_position_holder = {
 					OR = {
@@ -3515,7 +3555,6 @@ court_position_aptitude_traveling_friends_value = {
 					has_character_flag = travelling_friend
 				}
 			}
-			has_character_flag = travelling_friend
 		}
 		add = {
 			value = 20
@@ -3546,14 +3585,14 @@ ep3_foreign_ruler_interest_in_coup_value = {
 
 ep3_distance_to_comparator_claim = {
 	value = 0
-	add = "title_capital_county.squared_distance(scope:comparator.capital_county)"
+	add = "title_capital_county.squared_distance(scope:comparator.capital_province)"
 	abs = yes
 	multiply = -1
 }
 
 ep3_distance_to_comparator_capital_county = {
 	value = 0
-	add = "squared_distance(scope:comparator.capital_county)"
+	add = "squared_distance(scope:comparator.capital_province)"
 	abs = yes
 	multiply = -1
 }
@@ -3864,7 +3903,7 @@ hasan_sabbah_event_troops_value = {
 maa_regiments_cost_more_to_reinforce_per_soldier_trigger_mult = 4
 
 provision_refill_value = {
-	value = 0.3
+	value = 0.125
 	if = {
 		limit = {
 			trigger_if = {
@@ -3878,7 +3917,7 @@ provision_refill_value = {
 }
 
 provision_refill_value_tt = {
-	value = 0.3
+	value = 0.125
 	if = {
 		limit = { has_perk = prepared_conscription_perk }
 		multiply = 1.25
@@ -3896,7 +3935,7 @@ gold_refill_value = {
 }
 
 gold_refill_value_tt = {
-	value = 3
+	value = 2
 	if = {
 		limit = {
 			has_perk = cutting_corners_perk
@@ -4668,7 +4707,7 @@ ep3_actor_recipient_governor_trait_level_diff_value = {
 
 event_troops_ep3_separatist_scale_value = {
 	value = 100
-	multiply = { 
+	multiply = {
 		value = root.location.duchy.holder.primary_title.tier
 	}
 }
@@ -4713,11 +4752,33 @@ political_scheme_base_bonus_per_character = 5
 ## This is because there are various things they do that are _fairly_ unperformant, so it's important that we put a good soft-cap on their numbers to stop them growing out of control and tanking performance.
 ### Code decisions were made assuming that there would be _maybe_ 200 on the map in the late game, give or take ~50.
 #### More than that will work mechanically but prepare for substantial frame rate drops.
-max_desired_laamps_value = 200
+max_desired_laamps_value = {
+	value = 200
+	switch = {
+		trigger = has_game_rule
+		ai_laamp_numbers_25 = { value = 25 }
+		ai_laamp_numbers_50 = { value = 50 }
+		ai_laamp_numbers_100 = { value = 100 }
+		ai_laamp_numbers_150 = { value = 150 }
+		ai_laamp_numbers_200 = { value = 200 }
+	}
+}
+
+seventyfive_percent_of_max_desired_laamps_value = {
+	value = max_desired_laamps_value
+	multiply = 0.75
+}
 
 too_many_laamps_value = {
 	value = max_desired_laamps_value
-	add = 20
+	switch = {
+		trigger = has_game_rule
+		ai_laamp_numbers_25 = { add = 2 }
+		ai_laamp_numbers_50 = { add = 5 }
+		ai_laamp_numbers_100 = { add = 10 }
+		ai_laamp_numbers_150 = { add = 15 }
+		ai_laamp_numbers_200 = { add = 20 }
+	}
 }
 
 wipe_slate_min_xp_to_remove_trait_value = 5
@@ -5296,4 +5357,9 @@ laamp_marriable_men_realistic_value = {
 		}
 		add = 1
 	}
+}
+
+laamp_city_construction_year_value = {
+	value = scope:year_of_construction
+	add = 100
 }
