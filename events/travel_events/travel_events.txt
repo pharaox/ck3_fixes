@@ -20,14 +20,14 @@ namespace = travel_events
 #####################################################################################
 
 ############################
-# Travel Death Events 
+# Travel Death Events
 # by Chad Uhl
 ############################
 travel_events.0010 = {
 	type = character_event
 	title = travel_events.0010.t
 	desc = {
-		desc = travel_events.0010.intro 
+		desc = travel_events.0010.intro
 		first_valid = {
 			triggered_desc = {
 				trigger = { exists = scope:to_activity }
@@ -82,7 +82,7 @@ travel_events.0010 = {
 
 	}
 
-	option = { 
+	option = {
 		name = travel_events.0010.a
 	}
 }
@@ -93,7 +93,7 @@ travel_events.0011 = {
 		desc = travel_events.0011.desc_opening
 	}
 	desc = {
-		desc = travel_events.0011.intro 
+		desc = travel_events.0011.intro
 		first_valid = {
 			triggered_desc = {
 				trigger = { exists = scope:to_activity }
@@ -122,7 +122,7 @@ travel_events.0011 = {
 		}
 	}
 
-	option = { 
+	option = {
 		name = travel_events.0010.a
 	}
 }
@@ -156,9 +156,9 @@ travel_events.0050 = {
 	}
 
 	immediate = {
-		# Run this effect for custom loc to get a time period word 
+		# Run this effect for custom loc to get a time period word
 		get_period_of_time_word_setup_effect = {
-			START_DATE = var:travel_plan_start_date 
+			START_DATE = var:travel_plan_start_date
 		}
 	}
 
@@ -173,18 +173,18 @@ travel_events.0050 = {
 }
 
 ############################
-## Travel Option Events 
+## Travel Option Events
 ############################
 # Maintenance Event that enacts random upgrades on your wimpy knights from the Train Knights Travel Option
 travel_events.0060 = {
-	hidden = yes 
+	hidden = yes
 	trigger = {
 		# stop triggering event when you're done traveling or you have trained each knight once
-		is_travelling = yes 
+		is_travelling = yes
 		current_travel_plan = {
 			has_variable_list = knights_to_train
 			variable_list_size = {
-				name = knights_to_train 
+				name = knights_to_train
 				value >= 1
 			}
 		}
@@ -192,7 +192,7 @@ travel_events.0060 = {
 	immediate = {
 		current_travel_plan = {
 			random_in_list = {
-				variable = knights_to_train 
+				variable = knights_to_train
 				save_temporary_scope_as = selected_knight
 				random_list = {
 					10 = {
@@ -246,7 +246,7 @@ travel_events.0060 = {
 					65 = {
 						trigger = {
 							scope:selected_knight = {
-								is_acclaimed = yes 
+								is_acclaimed = yes
 							}
 						}
 						root = {
@@ -254,7 +254,7 @@ travel_events.0060 = {
 								type = event_marshal_good
 								title = travel_events.0060.notification.d
 								desc = travel_events.0060.notification_desc
-								left_icon = scope:selected_knight 
+								left_icon = scope:selected_knight
 								scope:selected_knight.accolade = {
 									add_glory = minor_glory_gain
 								}
@@ -373,7 +373,7 @@ travel_events.1000 = {
 	}
 
 	#Give the peasant shoes
-	option = { 
+	option = {
 		name = travel_events.1000.a
 
 		remove_short_term_gold = tiny_gold_value
@@ -418,7 +418,7 @@ travel_events.1000 = {
 	}
 
 	#Walking is good for morale
-	option = { 
+	option = {
 		name = travel_events.1000.c
 		hidden_effect = {
 			if = {
@@ -440,7 +440,7 @@ travel_events.1000 = {
 				}
 			}
 		}
-		stress_impact = {   
+		stress_impact = {
 			compassionate = miniscule_stress_impact_gain
 		}
 
@@ -496,6 +496,7 @@ travel_events.1001 = {
 	}
 
 	immediate = {
+		wayfarer_storyteller_fame_effect = { VALUE = roaming_reward_fame_small }
 		hidden_effect = {
 			scope:shoeless_peasant = {
 				if = {
@@ -530,7 +531,7 @@ travel_events.1001 = {
 	}
 
 	#Recruit them to your entourage!
-	option = { 
+	option = {
 		name = travel_events.1000.b
 		trigger = {
 			scope:shoeless_peasant = { is_landed = no }
@@ -545,7 +546,7 @@ travel_events.1001 = {
 				years = 5
 			}
 		}
-		stress_impact = {   
+		stress_impact = {
 			paranoid = minor_stress_impact_gain
 			greedy = minor_stress_impact_gain
 		}
@@ -559,7 +560,7 @@ travel_events.1001 = {
 	}
 
 	#Think nothing of it, friend!
-	option = { 
+	option = {
 		name = travel_events.1001.c
 		trigger = {
 			scope:shoeless_peasant = { is_landed = yes }
@@ -568,7 +569,7 @@ travel_events.1001 = {
 			target = scope:shoeless_peasant
 			reason = friend_showed_charity
 		}
-		stress_impact = {   
+		stress_impact = {
 			paranoid = minor_stress_impact_gain
 			shy = minor_stress_impact_gain
 			greedy = minor_stress_impact_gain
@@ -595,7 +596,7 @@ travel_events.1001 = {
 }
 
 #You refused them and they turned out to be a noble!
-travel_events.1002 = { 
+travel_events.1002 = {
 	type = character_event
 	title = travel_events.1002.title
 	desc = travel_events.1002.desc
@@ -622,13 +623,13 @@ travel_events.1002 = {
 	}
 
 	#Well shoot
-	option = { 
+	option = {
 		name = travel_events.1002.a
 		set_relation_rival = {
 			target = scope:shoeless_peasant
 			reason = rival_ungenerous
 		}
-		stress_impact = {   
+		stress_impact = {
 			base = medium_stress_impact_gain
 			callous = medium_stress_impact_loss
 			sadistic = medium_stress_impact_loss
@@ -653,7 +654,7 @@ travel_events.1002 = {
 #Bandit attack
 #This is a danger event
 
-travel_events.1003 = { 
+travel_events.1003 = {
     type = character_event
     title = travel_events.1003.t
     desc = travel_events.1003.desc
@@ -679,12 +680,13 @@ travel_events.1003 = {
 				type = county_control
 			}
 		}
-		NOR = { 
+		NOR = {
 			has_character_flag = had_travel_danger_event_1002_bandit_event_recently
 			has_character_flag = had_travel_event_3070_bandit_event_recently
 		}
     }
     immediate = {
+    	wayfarer_storyteller_fame_effect = { VALUE = roaming_reward_fame_small }
 		mp_delay_travel_plan = { DAYS = 90 }
 
         create_character = {
@@ -709,16 +711,16 @@ travel_events.1003 = {
 
     }
     #Pay
-    option = { 
+    option = {
         name = travel_events.1003.a
-        stress_impact = {   
+        stress_impact = {
             greedy = miniscule_stress_impact_gain
         }
         remove_short_term_gold = medium_gold_value
     	ai_chance = {
     	    base = 100
     	    ai_value_modifier = {
-    	        ai_greed = -1    
+    	        ai_greed = -1
     	    }
 			modifier = {
 				factor = 0
@@ -727,13 +729,13 @@ travel_events.1003 = {
     	}
     }
     #Fight
-    option = { 
+    option = {
         name = travel_events.1003.b
         duel = {
         	skill = prowess
         	value = decent_skill_rating
         	#They die!
-			1 = { 
+			1 = {
 				scope:travel_leader = {
 					death = {
 						killer = scope:attacking_bandit
@@ -742,31 +744,31 @@ travel_events.1003 = {
 				}
 			}
 			#They are seriously wounded
-			3 = { 
+			3 = {
 				scope:travel_leader = {
 					apply_maimed_trait_and_modifier_effect = yes
 				}
 			}
 			#They receive minor wounds
-			5 = { 
+			5 = {
 				scope:travel_leader = {
 					increase_wounds_effect = { REASON = fight }
 				}
 			}
 		}
-		stress_impact = {   
+		stress_impact = {
 			greedy = miniscule_stress_impact_loss
 			lustful = minor_stress_impact_gain
 		}
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_compassion = -1    
+				ai_compassion = -1
 			}
 		}
 	}
 	#Diplomacy
-	option = { 
+	option = {
 		name = travel_events.1003.c
 		duel = {
 			skill = diplomacy
@@ -797,7 +799,7 @@ travel_events.1003 = {
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_compassion = 1   
+				ai_compassion = 1
 			}
 		}
 	}
@@ -821,7 +823,7 @@ travel_events.1005 = { #Storm washes artifact overboard
 	desc = travel_events.1005.desc
 	theme = travel_danger
 	left_portrait = {
-		character = root 
+		character = root
 		animation = shock
 	}
 
@@ -879,14 +881,14 @@ travel_events.1005 = { #Storm washes artifact overboard
 	option = { #Save it!
 		name = travel_events.1005.a
 
-		stress_impact = {   
+		stress_impact = {
 			greedy = medium_stress_impact_loss
 			compassionate = medium_stress_impact_gain
 		}
 
 		scope:travel_leader = {
 			duel = {
-				skill = prowess	
+				skill = prowess
 				value = medium_skill_rating
 				50 = {
 					compare_modifier = {
@@ -917,7 +919,7 @@ travel_events.1005 = { #Storm washes artifact overboard
 								death_reason = death_drowned
 							}
 						}
-					}	
+					}
 				}
 			}
 		}
@@ -925,7 +927,7 @@ travel_events.1005 = { #Storm washes artifact overboard
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_greed = 1    
+				ai_greed = 1
 			}
 		}
 	}
@@ -933,7 +935,7 @@ travel_events.1005 = { #Storm washes artifact overboard
 	option = { #Don't risk it
 		name = travel_events.1005.b
 
-		stress_impact = {   
+		stress_impact = {
 			greedy = medium_stress_impact_gain
 		}
 
@@ -957,8 +959,8 @@ travel_events.1005 = { #Storm washes artifact overboard
 								rarity = masterwork
 							}
 						}
-	
-	
+
+
 					}
 				}
 				#To do make more restrictive
@@ -973,7 +975,7 @@ travel_events.1005 = { #Storm washes artifact overboard
 					}
 					scope:background_terrain_scope = {
 						random_neighboring_province = {
-							limit = { 
+							limit = {
 								is_sea_province = no
 								exists = county.holder
 							}
@@ -984,11 +986,11 @@ travel_events.1005 = { #Storm washes artifact overboard
 				}
 			}
 		}
-		
+
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_compassion = 1    
+				ai_compassion = 1
 			}
 		}
 	}
@@ -1014,7 +1016,7 @@ scripted_trigger great_travel_leader_trigger = {
 
 }
 
-# Used when hiring a new travel leader 
+# Used when hiring a new travel leader
 scripted_effect initialize_good_travel_leader_effect = {
 	hidden_effect = {
 		if = {
@@ -1023,12 +1025,12 @@ scripted_effect initialize_good_travel_leader_effect = {
 		}
 		add_trait_xp = {
 			trait = lifestyle_traveler
-			track = travel 
+			track = travel
 			value = { 0 10 }
 		}
 		add_trait_xp = {
 			trait = lifestyle_traveler
-			track = danger 
+			track = danger
 			value = { 0 10 }
 		}
 	}
@@ -1042,13 +1044,13 @@ scripted_effect initialize_great_travel_leader_effect = {
 		}
 		add_trait_xp = {
 			trait = lifestyle_traveler
-			track = travel 
-			value = { 10 20 } 
+			track = travel
+			value = { 10 20 }
 		}
 		add_trait_xp = {
 			trait = lifestyle_traveler
-			track = danger 
-			value = { 10 20 } 
+			track = danger
+			value = { 10 20 }
 		}
 	}
 }
@@ -1060,13 +1062,13 @@ scripted_effect initialize_great_travel_leader_effect = {
 ############################
 
 #Find a caravan master
-travel_events.1010 = { 
+travel_events.1010 = {
 	type = character_event
 	title = travel_events.1010.t
 	desc = travel_events.1010.desc
 	theme = stewardship
 	left_portrait = {
-		character = scope:good_travel_leader_option 
+		character = scope:good_travel_leader_option
 		animation = chancellor
 	}
 	right_portrait = {
@@ -1074,7 +1076,7 @@ travel_events.1010 = {
 		animation = steward
 	}
 	trigger = {
-		exists = capital_province 
+		exists = capital_province
 	}
 	immediate = {
 		# Good Character
@@ -1183,7 +1185,7 @@ travel_events.1010 = {
 			}
 			scope:great_travel_leader_option = {
 				# Add travel trait and randomized experience to both tracks
-				initialize_great_travel_leader_effect = yes 
+				initialize_great_travel_leader_effect = yes
 			}
 		}
 	}
@@ -1281,12 +1283,12 @@ travel_events.1010 = {
 ### Replace a caravan master if yours dies while traveling
 travel_events.1020 = {
 	type = character_event
-	title = travel_events.1020.t 
+	title = travel_events.1020.t
 	desc = {
 		first_valid = {
 			triggered_desc = { # if your travel leader died
 				trigger = {
-					# prev travel leader died 
+					# prev travel leader died
 					scope:old_travel_leader = {
 						is_alive = no
 					}
@@ -1302,7 +1304,7 @@ travel_events.1020 = {
 					exists = scope:both_entourage_members
 				}
 				desc = travel_events.1020.desc.two_entourage_members
-			} 
+			}
 			triggered_desc = { # One is in your entourage
 				trigger = {
 					exists = scope:one_entourage_member
@@ -1314,14 +1316,14 @@ travel_events.1020 = {
 		}
 
 	}
-	theme = travel 
+	theme = travel
 	left_portrait = {
 		character = scope:temp_caravan_master_option_1
-		animation = personality_honorable 
+		animation = personality_honorable
 	}
 	right_portrait = {
 		character = scope:temp_caravan_master_option_2
-		animation = personality_honorable 
+		animation = personality_honorable
 	}
 
 	trigger = {
@@ -1355,11 +1357,11 @@ travel_events.1020 = {
 						can_be_employed_as = travel_leader_court_position
 						NOT = { has_court_position = travel_leader_court_position }
 					}
-					order_by = stewardship 
+					order_by = stewardship
 					save_scope_as = temp_caravan_master_option_1
 				}
 				ordered_entourage_character = {
-					order_by = stewardship 
+					order_by = stewardship
 					limit = {
 						NOT = { this = scope:temp_caravan_master_option_1 }
 						can_be_employed_as = travel_leader_court_position
@@ -1385,7 +1387,7 @@ travel_events.1020 = {
 						can_be_employed_as = travel_leader_court_position
 						NOT = { has_court_position = travel_leader_court_position }
 					}
-					order_by = stewardship 
+					order_by = stewardship
 					save_scope_as = temp_caravan_master_option_1
 				}
 			}
@@ -1402,7 +1404,7 @@ travel_events.1020 = {
 					}
 				}
 				random_pool_character = {
-					province = root.location 
+					province = root.location
 					limit = {
 						# Cloned from Caravan Master triggers out of necessity
 						is_clergy = no
@@ -1490,18 +1492,18 @@ travel_events.1020 = {
 		else_if = { # If there are two pool characters that can be chosen, we present them
 			limit = {
 				any_pool_character = {
-					province = root.location 
+					province = root.location
 					count >= 2
 					can_be_employed_as = travel_leader_court_position
 				}
 			}
 			random_pool_character = {
-				province = root.location 
+				province = root.location
 				limit = { can_be_employed_as = travel_leader_court_position }
 				save_scope_as = temp_caravan_master_option_1
 			}
 			random_pool_character = {
-				province = root.location 
+				province = root.location
 				limit = { can_be_employed_as = travel_leader_court_position }
 				save_scope_as = temp_caravan_master_option_2
 			}
@@ -1509,12 +1511,12 @@ travel_events.1020 = {
 		else_if = { # If there is one pool character, then we grab 'em then create a character
 			limit = {
 				any_pool_character = {
-					province = root.location 
+					province = root.location
 					can_be_employed_as = travel_leader_court_position
 				}
 			}
 			random_pool_character = {
-				province = root.location 
+				province = root.location
 				limit = { can_be_employed_as = travel_leader_court_position }
 				save_scope_as = temp_caravan_master_option_1
 			}
@@ -1713,22 +1715,22 @@ travel_events.2200 = {
 		character = root
 		triggered_animation = { #a bit scared
 			trigger = {
-				NOR = { 
+				NOR = {
 					has_trait = brave
 					has_trait = wrathful
 				}
 			}
-			animation = worry 
+			animation = worry
 		}
 		triggered_animation = { #a bit cocky
-			trigger = { 
+			trigger = {
 				OR = {
 					has_trait = brave
-					has_trait = wrathful 
+					has_trait = wrathful
 				}
-			} 
-			animation = personality_rational 
- 
+			}
+			animation = personality_rational
+
 		}
 	}
 
@@ -1759,13 +1761,14 @@ travel_events.2200 = {
 	cooldown = { years = 40 }
 
 	immediate = {
+		wayfarer_storyteller_fame_effect = { VALUE = roaming_reward_fame_small }
 		current_travel_plan = {
    			delay_travel_plan = { days = 30 }
         }
 
 		current_travel_plan = {
 			ordered_entourage_character = {
-				limit = { 
+				limit = {
 					is_ai = yes
 					is_adult = yes
 				}
@@ -1949,7 +1952,7 @@ travel_events.2200 = {
 							}
 						}
 					}
-					root = { 
+					root = {
 						add_courtier = scope:local_knight
 						current_travel_plan = {
 							add_companion = scope:local_knight
@@ -2059,7 +2062,7 @@ scripted_trigger travel_events_4050_mystic_trigger = {
 }
 
 scripted_trigger travel_events_4050_singing_trigger = {
-	culture = { 
+	culture = {
 		has_same_culture_heritage = root.location.county.culture
 	}
 	OR = {
@@ -2077,7 +2080,7 @@ travel_events.4050 = {
 	desc = {
 		first_valid = {
 			triggered_desc = {
-				trigger = { 
+				trigger = {
 					scope:friendly_child = {
 						has_character_flag = interpreter_child
 					}
@@ -2085,7 +2088,7 @@ travel_events.4050 = {
 				desc = travel_events.4050.interpreter
 			}
 			triggered_desc = {
-				trigger = { 
+				trigger = {
 					scope:friendly_child = {
 						has_character_flag = religious_child
 					}
@@ -2093,7 +2096,7 @@ travel_events.4050 = {
 				desc = travel_events.4050.religious
 			}
 			triggered_desc = {
-				trigger = { 
+				trigger = {
 					scope:friendly_child = {
 						has_character_flag = singing_child
 					}
@@ -2102,7 +2105,7 @@ travel_events.4050 = {
 			}
 		}
 	}
-	
+
 	cooldown = { years = 20 }
 
 	theme = travel
@@ -2111,22 +2114,22 @@ travel_events.4050 = {
 		character = root
 		triggered_animation = { #d'aww
 			trigger = {
-				OR = { 
+				OR = {
 					has_trait = compassionate
 					has_trait = generous
 					has_trait = trusting
 				}
 			}
-			animation = admiration 
+			animation = admiration
 		}
 		triggered_animation = { #not d'aww
-			trigger = { 
+			trigger = {
 				NOR = {
 					has_trait = compassionate
 					has_trait = generous
 					has_trait = trusting
 				}
-			} 
+			}
 			animation = personality_rational
 		}
 	}
@@ -2169,21 +2172,21 @@ travel_events.4050 = {
 					# kid knows languages
 					AND = {
 						root = {
-							NOT = { 
-								culture = { has_same_culture_language = root.location.county.culture } 
+							NOT = {
+								culture = { has_same_culture_language = root.location.county.culture }
 							}
 						}
 						travel_events_4050_interpreter_trigger = yes
 					}
 					# kid knows faiths
 					AND = {
-						NOT = { root.faith.religion = root.location.county.faith.religion }	
+						NOT = { root.faith.religion = root.location.county.faith.religion }
 						travel_events_4050_mystic_trigger = yes
 					}
 					#kid knows their heritage
 					AND = {
-						NOT = { 
-							root.culture = { has_same_culture_heritage = root.location.county.culture } 
+						NOT = {
+							root.culture = { has_same_culture_heritage = root.location.county.culture }
 						}
 						travel_events_4050_singing_trigger = yes
 					}
@@ -2203,8 +2206,8 @@ travel_events.4050 = {
 				10 = {
 					trigger = {
 						root = {
-							NOT = { 
-								culture = { has_same_culture_language = root.location.county.culture } 
+							NOT = {
+								culture = { has_same_culture_language = root.location.county.culture }
 							}
 						}
 						any_entourage_character = {
@@ -2428,7 +2431,7 @@ travel_events.4050 = {
 				callous = minor_stress_impact_gain
 			}
 		}
-		
+
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
@@ -2446,7 +2449,7 @@ travel_events.4050 = {
 							has_trait = zealous
 							has_trait = cynical
 						}
-						
+
 					}
 					has_trait = callous
 					has_trait = paranoid
@@ -2455,7 +2458,7 @@ travel_events.4050 = {
 		}
 	}
 
-	
+
 
 	option = {	#this kid and his heritage should be kept apart
 		name = travel_events.4050.b
@@ -2487,7 +2490,7 @@ travel_events.4050 = {
 									flag = convert_culture
 								}
 							}
-							
+
 						}
 					}
 					#is root's courtier
@@ -2554,7 +2557,7 @@ travel_events.4050 = {
 									flag = convert_faith
 								}
 							}
-							
+
 						}
 					}
 					#is root's courtier
@@ -2584,7 +2587,7 @@ travel_events.4050 = {
 				}
 			}
 			add_piety = minor_piety_gain
-			stress_impact = {	
+			stress_impact = {
 				paranoid = miniscule_stress_impact_loss
 				zealous = miniscule_stress_impact_loss
 				compassionate = medium_stress_impact_gain
@@ -2621,7 +2624,7 @@ travel_events.4050 = {
 			text = {
 				first_valid = {
 					triggered_desc = {
-						trigger = { 
+						trigger = {
 							scope:friendly_child = {
 								has_character_flag = interpreter_child
 							}
@@ -2629,7 +2632,7 @@ travel_events.4050 = {
 						desc = travel_events.4050.c.interpreter
 					}
 					triggered_desc = {
-						trigger = { 
+						trigger = {
 							scope:friendly_child = {
 								has_character_flag = religious_child
 							}
@@ -2637,7 +2640,7 @@ travel_events.4050 = {
 						desc = travel_events.4050.c.religious
 					}
 					triggered_desc = {
-						trigger = { 
+						trigger = {
 							scope:friendly_child = {
 								has_character_flag = singing_child
 							}
@@ -2664,7 +2667,7 @@ travel_events.4050 = {
 			}
 			add_prestige = miniscule_prestige_gain
 		}
-		
+
 		ai_chance = {
 			ai_value_modifier = {
 				ai_sociability = -1
@@ -2739,7 +2742,7 @@ travel_events.4050 = {
 ## CE1 Legend event
 # by Nick Meredith
 
-travel_events.5001 = { 
+travel_events.5001 = {
 	type = character_event
 	title = travel_events.5001.t
 	desc = travel_events.5001.desc
@@ -2770,6 +2773,7 @@ travel_events.5001 = {
 		}
 	}
 	immediate = {
+		wayfarer_storyteller_fame_effect = { VALUE = roaming_reward_fame_small }
 		location = {
 			save_scope_as = background_wilderness_scope
 			random_province_legend = {
@@ -2777,7 +2781,7 @@ travel_events.5001 = {
 					exists = legend_owner
 					NOT = {
 						legend_owner = root
-					}					
+					}
 				}
 				save_scope_as = potential_legend
 			}
@@ -2793,7 +2797,7 @@ travel_events.5001 = {
 	}
 
 	# Take up the legend
-	option = { 
+	option = {
 		name = travel_events.5001.a
 
 		set_promoted_legend = scope:potential_legend
@@ -2812,7 +2816,7 @@ travel_events.5001 = {
 	}
 
 	#Carry it with you
-	option = { 
+	option = {
 		name = travel_events.5001.b
 
 		flavor = travel_events.5001.b.flavor
@@ -2823,20 +2827,20 @@ travel_events.5001 = {
 			}
 		}
 
-		stress_impact = {   
+		stress_impact = {
 			gregarious = miniscule_stress_impact_loss
 			shy = minor_stress_impact_gain
 		}
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_compassion = 1    
+				ai_compassion = 1
 			}
 		}
 	}
 
 	#Leave it
-	option = { 
+	option = {
 		name = travel_events.5001.c
 
 		if = {
@@ -2861,7 +2865,7 @@ travel_events.5001 = {
 		ai_chance = {
 			base = 100
 			ai_value_modifier = {
-				ai_boldness = 1   
+				ai_boldness = 1
 			}
 		}
 	}
