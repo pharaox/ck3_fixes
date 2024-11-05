@@ -2640,7 +2640,12 @@
 	}
 	background = {
 		trigger = {
-			activity_location.culture = { has_graphical_mena_culture_group_trigger = yes }
+			activity_location.culture = {
+				OR = {
+					has_graphical_mena_culture_group_trigger = yes
+					has_graphical_iranian_culture_group_trigger = yes
+				}
+			}
 		}
 		texture = "gfx/interface/illustrations/event_scenes/ep2_holysite_mena.dds"
 		environment = "environment_generic_holy_site_mena"

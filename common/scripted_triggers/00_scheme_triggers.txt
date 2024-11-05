@@ -65,10 +65,10 @@ can_start_hostile_scheme_against_trigger = {
 agent_valid_to_be_discovered_by_spymaster = {
 	trigger_if = {
 		limit = {
-			exists = scope:target.court_owner.cp:councillor_spymaster
+			exists = scope:target_character.court_owner.cp:councillor_spymaster
 		}
 		NOT = {
-			this = scope:target.court_owner.cp:councillor_spymaster
+			this = scope:target_character.court_owner.cp:councillor_spymaster
 		}
 	}
 	NOT = {
@@ -76,15 +76,15 @@ agent_valid_to_be_discovered_by_spymaster = {
 	}
 	trigger_if = {
 		limit = {
-			exists = scope:target.court_owner
+			exists = scope:target_character.court_owner
 		}
 		NOR = {
 			reverse_has_opinion_modifier = {
-				target = scope:target.court_owner
+				target = scope:target_character.court_owner
 				modifier = scheming_against_me
 			}
 			reverse_has_opinion_modifier = {
-				target = scope:target.court_owner
+				target = scope:target_character.court_owner
 				modifier = schemed_against_me
 			}
 		}
@@ -421,8 +421,8 @@ can_use_befriend_scheme_trigger = {
 		AND = {
 			government_has_flag = government_is_clan
 			is_in_same_clan_as_trigger = { CHARACTER = $TARGET$ }
-			house = { has_house_unity_stage = harmonious }	
-		}	
+			house = { has_house_unity_stage = harmonious }
+		}
 	}
 }
 
@@ -511,7 +511,7 @@ is_savable_murder_scheme_trigger = {
 	}
 }
 
-# Could & would this lover of $TARGET$ 
+# Could & would this lover of $TARGET$
 available_lover_to_sacrifice_in_murder_trigger = {
 	is_ruler = no
 	is_available_ai_adult = yes
@@ -671,7 +671,7 @@ is_valid_agent_standard_trigger = {
 		}
 	}
 	# FIX Prevent army characters from acting as agents
-	is_in_army = no	
+	is_in_army = no
 }
 
 char_can_fit_into_scheme_trigger = {
