@@ -10,7 +10,7 @@
 @laamp_base_contract_schemes_1004_gallowsbait_xp_min_value = 25
 @laamp_base_contract_schemes_1004_gallowsbait_xp_max_value = 55
 @laamp_base_contract_schemes_1301_ai_min_prowess_value = 15
-@laamp_base_contract_schemes_1782_min_gold_value = 25 # REBALANCE (0.5)
+@laamp_base_contract_schemes_1782_min_gold_value = 50
 @laamp_base_contract_schemes_2311_ai_weight_threshold_value = 35
 @laamp_base_contract_schemes_2541_intrigue_threshold_value = extremely_high_skill_rating
 @laamp_base_contract_schemes_2661_stewardship_threshold_value = extremely_high_skill_rating
@@ -18,7 +18,7 @@
 @laamp_base_contract_schemes_2671_prowess_gain_value = 1
 @laamp_base_contract_schemes_3661_martial_threshold_value = extremely_high_skill_rating
 @laamp_base_contract_schemes_3661_prowess_threshold_value = very_high_skill_rating
-@laamp_base_contract_schemes_5901_min_gold_value = 25 # REBALANCE (0.5)
+@laamp_base_contract_schemes_5901_min_gold_value = 50
 
 namespace = laamp_base_contract_schemes
 
@@ -11143,13 +11143,13 @@ laamp_base_contract_schemes.1782 = {
 			scope:victim = {
 				if = {
 					limit = {
-						gold < 25 # REBALANCE
+						gold < 50
 					}
 					add_gold = {
 						value = {
 							integer_range = {
-								min = 25 # REBALANCE
-								max = 100 # REBALANCE
+								min = 50
+								max = 200
 							}
 						}
 					}
@@ -11208,11 +11208,11 @@ laamp_base_contract_schemes.1782 = {
 			value = {
 				value = scope:victim.gold
 				multiply = 0.2
-				min = 25 # REBALANCE
+				min = 50
 				max = {
 					value = scope:victim.highest_held_title_tier
-					multiply = 50 # REBALANCE
-					min = 50 # REBALANCE
+					multiply = 100
+					min = 100
 				}
 			}
 		}
@@ -21411,7 +21411,7 @@ laamp_base_contract_schemes.3042 = {
 				name = contribution_gold
 				value = {
 					value = gold
-					multiply = 0.25 # REBALANCE
+					multiply = 0.5
 					min = 0
 				}
 			}
@@ -21419,7 +21419,7 @@ laamp_base_contract_schemes.3042 = {
 				name = contribution_prestige
 				value = {
 					value = prestige
-					multiply = 0.10 # REBALANCE
+					multiply = 0.25
 					min = 0
 				}
 			}
@@ -21427,7 +21427,7 @@ laamp_base_contract_schemes.3042 = {
 				name = contribution_piety
 				value = {
 					value = piety
-					multiply = 0.10 # REBALANCE
+					multiply = 0.25
 					min = 0
 				}
 			}
@@ -28475,13 +28475,13 @@ laamp_base_contract_schemes.5901 = {
 			scope:victim = {
 				if = {
 					limit = {
-						gold < 25 # REBALANCE
+						gold < 50
 					}
 					add_gold = {
 						value = {
 							integer_range = {
-								min = 25 # REBALANCE
-								max = 50 # REBALANCE
+								min = 50
+								max = 100
 							}
 						}
 					}
@@ -28531,8 +28531,8 @@ laamp_base_contract_schemes.5901 = {
 			value = {
 				value = scope:victim.gold
 				multiply = 0.5
-				min = 25 # REBALANCE
-				max = 150 # REBALANCE
+				min = 50
+				max = 300
 			}
 		}
 		## Finally, check our skills for the duel diffs.

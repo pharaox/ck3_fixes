@@ -9,7 +9,6 @@ common/domiciles/buildings/00_camp_buildings.txt
 common/factions/00_peasant_faction_new.txt
 common/important_actions/07_ep3_actions.txt
 common/on_action/travel_on_actions.txt
-common/script_values/07_ep3_values.txt
 common/scripted_effects/03_bp1_scripted_effects.txt
 common/scripted_effects/03_dlc_fp3_artifact_creation_effects.txt
 common/scripted_triggers/00_court_position_triggers.txt
