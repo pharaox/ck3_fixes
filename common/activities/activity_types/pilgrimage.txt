@@ -17,7 +17,7 @@
 		is_available_adult = yes
 		faith = {
 			NOT = { has_doctrine_parameter = forbidden_from_pilgrimage }
-			any_holy_site = { exists = this }
+			any_holy_site = { exists = this }	
 		}
 		#Check if all of your holy sites are on cooldown
 		trigger_if = {
@@ -27,7 +27,7 @@
 					memory_age_years < 5
 				}
 			}
-			custom_tooltip = {
+			custom_tooltip = { 
 				text = activity_pilgrimage.is_activity_available.all_holy_sites_on_cooldown
 				faith = {
 					any_holy_site = {
@@ -53,7 +53,7 @@
 		trigger_else = { always = yes }
 		#Are you mandatory Hajj and Mecca is your capital?
 		trigger_if = {
-			limit = {
+			limit = { 
 				faith = { has_doctrine_parameter = mandatory_hajj }
 				capital_province.barony ?= title:b_makka
 				is_landless_adventurer = no # FIX ?
@@ -100,7 +100,7 @@
 			exists = capital_province
 			is_capable_adult = yes
 			is_imprisoned = no
-			is_playable_character = yes
+			is_playable_character = yes 
 			NOT = { is_incapable = yes }
 			#Invalidate flag, until/unless this is fixed in code
 			NOT = { has_variable = pilgrimage_invalidated_illness }
@@ -171,7 +171,7 @@
 	on_host_death = {
 		#Make the player heir the new host, if they're on the Pilgrimage
 		if = {
-			limit = {
+			limit = { 
 				exists = scope:host.player_heir
 				any_attending_character = { this = scope:host.player_heir }
 				scope:host.faith = scope:host.player_heir.faith
@@ -222,7 +222,7 @@
 			}
 		}
 		#You only get to visit any particular holy site once every 5 years
-		custom_tooltip = {
+		custom_tooltip = { 
 			text = activity_pilgrimage.is_location_valid.recently_visited
 			NOT = {
 				scope:host = {
@@ -280,9 +280,9 @@
 					OR = {
 						AND = {
 							#These two really shouldn't exist without each other, but safe-checking
-							NOT = {
+							NOT = { 
 								exists = var:visited_unique_holy_sites_list
-								exists = var:visited_unique_holy_sites_count
+								exists = var:visited_unique_holy_sites_count 
 							}
 						}
 						AND = {
@@ -291,7 +291,7 @@
 							NOT = {
 								any_in_list = {
 									variable = visited_unique_holy_sites_list
-									this = root
+									this = root 
 								}
 							}
 
@@ -401,35 +401,35 @@
 				desc = activity_pilgrimage_province_very_short_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_small
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_medium
 				}
 				desc = activity_pilgrimage_province_pretty_short_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_medium
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_large
 				}
 				desc = activity_pilgrimage_province_short_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_large
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_huge
 				}
 				desc = activity_pilgrimage_province_intermediate_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_huge
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_almost_massive
 				}
 				desc = activity_pilgrimage_province_respectably_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_almost_massive
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_massive
 				}
@@ -437,7 +437,7 @@
 			}
 			#Klingenberg -> Jerusalem
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					"scope:host.capital_province.squared_distance(root)" > squared_distance_massive
 					"scope:host.capital_province.squared_distance(root)" <= squared_distance_monstrous
 				}
@@ -454,7 +454,7 @@
 		#Once again, with feeling - needs to be at the end of the PROVINCE_DESCRIPTION since it has the Effects-part
 		first_valid = {
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					scope:host.capital_province = {
 						squared_distance = {
 							target = root
@@ -465,7 +465,7 @@
 				desc = activity_pilgrimage_province_very_long_mult_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					scope:host.capital_province = {
 						squared_distance = {
 							target = root
@@ -476,7 +476,7 @@
 				desc = activity_pilgrimage_province_long_mult_desc
 			}
 			triggered_desc = {
-				trigger = {
+				trigger = { 
 					scope:host.capital_province = {
 						squared_distance = {
 							target = root
@@ -560,7 +560,7 @@
 			}
 		}
 		if = {
-			limit = {
+			limit = { 
 				has_trait = zealous
 				NOT = { has_trait = pilgrim }
 			}
@@ -849,7 +849,7 @@
 				# bp2_yearly.2030
 				if = {
 					limit = {
-						exists = scope:province
+						exists = scope:province 
 						has_character_flag = imaginary_friend_pilgrimage_discount
 						any_owned_story = {
 							story_type = story_cycle_imaginary_friend
@@ -890,7 +890,7 @@
 	ui_predicted_cost = {
 		gold = {
 			# Calculate average cost of traveling to one of your holy sites
-			faith = {
+			faith = { 
 				# Calculate a summation of the costs to travel to each of your faith's holy sites
 				# MUST BE SYNCED WITH THE PHASE COST
 				every_holy_site = {
@@ -901,7 +901,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_medium
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 0.2
 						}
 					}
@@ -912,7 +912,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_large
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 0.4
 						}
 					}
@@ -923,7 +923,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_huge
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 0.6
 						}
 					}
@@ -934,7 +934,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_almost_massive
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 0.8
 						}
 					}
@@ -945,7 +945,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_massive
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 1
 						}
 					}
@@ -956,7 +956,7 @@
 							"squared_distance(root.capital_province)" <= squared_distance_monstrous
 						}
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 1.2
 						}
 					}
@@ -964,7 +964,7 @@
 					else_if = {
 						limit = { "squared_distance(root.capital_province)" > squared_distance_monstrous }
 						add = {
-							value = root.medium_gold_value
+							value = root.medium_gold_value 
 							multiply = 1.5
 						}
 					}
@@ -990,9 +990,9 @@
 				value = pilgrimage_base_cost
 				multiply = activity_cost_scale_by_era
 			}
-
-			# Options
-			add = { # Pomp Option
+			
+			# Options 
+			add = { # Pomp Option 
 				value = 0 # Appropriate Cost
 				add = -10 # Humble Cost
 				add = 50 # Ceremonial Cost
@@ -1057,10 +1057,10 @@
 				}
 			}
 			min = minor_gold_value
-
+			
 			# Make it a multiple of 5 (rounded up)
 			divide = 5
-			ceiling = yes
+			ceiling = yes 
 			multiply = 5
 		}
 	}
@@ -1078,8 +1078,8 @@
 				#Crashes [sometimes] if you start the game with a ruler where this is default then tag over to another ruler where this isn't default
 				default = {
 					OR = {
-						NOT = {
-							faith = { has_doctrine_parameter = mandatory_hajj }
+						NOT = { 
+							faith = { has_doctrine_parameter = mandatory_hajj } 
 						}
 						has_trait = hajjaj
 					}
@@ -1408,15 +1408,15 @@
 								desc = pilgrimage_cost_pomp_ceremonial
 							}
 							add = {
-								value = 10
+								value = 10 
 								multiply = activity_cost_scale_by_tier
 								subtract = 10
 								desc = activity_cost_scale_by_tier_desc
 							}
 							add = {
-								value = 10
+								value = 10 
 								multiply = activity_cost_scale_by_era
-								subtract = 10
+								subtract = 10 
 								desc = activity_cost_scale_by_era_desc
 							}
 						}
@@ -1431,7 +1431,7 @@
 						}
 					}
 				}
-
+				
 				# Travel modifier given in on_enter_travel_state.
 
 				# We just grab/generate random same-faith "pilgrims" from the local pool.
@@ -1448,7 +1448,7 @@
 				default = yes
 
 				# Entourage option grabbing suitable bodyguards & maybe someone from court who really likes you, + randos.
-				travel_entourage_selection = {
+				travel_entourage_selection = { 
 					weight = pilgrimage_entourage_base_set_weighting_value
 					max = pilgrimage_entourage_pomp_appropriate_max_value
 					invite_rule_order = 1
@@ -1465,7 +1465,7 @@
 			pilgrimage_pomp_ceremonial = {
 				is_shown = { has_dlc_feature = advanced_activities }
 
-				cost = {
+				cost = { 
 					gold = {
 						add = {
 							desc = pilgrimage_cost_pomp_ceremonial
@@ -1474,15 +1474,15 @@
 								desc = pilgrimage_cost_pomp_ceremonial
 							}
 							add = {
-								value = 50
+								value = 50 
 								multiply = activity_cost_scale_by_tier
 								subtract = 50
 								desc = activity_cost_scale_by_tier_desc
 							}
 							add = {
-								value = 50
+								value = 50 
 								multiply = activity_cost_scale_by_era
-								subtract = 50
+								subtract = 50 
 								desc = activity_cost_scale_by_era_desc
 							}
 							if = {
@@ -1530,7 +1530,7 @@
 			pilgrimage_pomp_throng = {
 				is_shown = { has_dlc_feature = advanced_activities }
 
-				cost = {
+				cost = { 
 					gold = {
 						add = {
 							desc = pilgrimage_cost_pomp_throng
@@ -1539,15 +1539,15 @@
 								desc = pilgrimage_cost_pomp_throng
 							}
 							add = {
-								value = 100
+								value = 100 
 								multiply = activity_cost_scale_by_tier
 								subtract = 100
 								desc = activity_cost_scale_by_tier_desc
 							}
 							add = {
-								value = 100
+								value = 100 
 								multiply = activity_cost_scale_by_era
-								subtract = 100
+								subtract = 100 
 								desc = activity_cost_scale_by_era_desc
 							}
 							if = {
@@ -1676,7 +1676,7 @@
 						multiply = activity_cost_scale_by_era
 						if = {
 							limit = {
-								exists = scope:province
+								exists = scope:province 
 								has_character_flag = imaginary_friend_pilgrimage_discount
 								any_owned_story = {
 									story_type = story_cycle_imaginary_friend
@@ -1737,19 +1737,19 @@
 
 					#Boost short pilgrimages a bit so they don't always get shafted
 					account_for_pilgrimage_length_type_effect = yes
-
+				
 					#Keep track of how many unique holy sites we've visited
 					save_unique_holy_site_and_update_count_variable_for_tally_effect = { HOLY_SITE = scope:activity.activity_location }
-
+				
 					#Keep track of how many pilgrimages we've undertaken for fun stats at the conclusion
 					if = {
 						limit = { has_variable = num_pilgrimages_undertaken }
 						change_variable = {
 							name = num_pilgrimages_undertaken
 							add = 1
-						}
+						}	
 					}
-
+				
 					#Arrival events - where Pilgrims gain their Pilgrim trait
 					#We have the Obligatory option selected - we skip the destination events
 					if = {
@@ -1823,9 +1823,9 @@
 									}
 								}
 								#No events until you're done with your chain
-								has_character_flag = in_pilgrimage_event_chain
+								has_character_flag = in_pilgrimage_event_chain 
 							}
-						}
+						} 
 						#No events until you're done with your chain
 					}
 					#We're just doing regular pilgrim destination stuff
@@ -1866,9 +1866,9 @@
 						}
 					}
 					#Resolve how we did with our type so we can bake that into the total reward
-					resolve_pilgrimage_type_reward_effect = yes
+					resolve_pilgrimage_type_reward_effect = yes 
 					#Conclusion event
-					trigger_event = pilgrimage.7000
+					trigger_event = pilgrimage.7000 
 					#Reward effect, looks at if Hajj (in that case looks at if you should get trait or not) or Pilgrimage and award appropriate rewards and log entries
 					pilgrimage_completed_log_entry_effect = yes
 				}
@@ -2072,7 +2072,7 @@
 			}
 		}
 	}
-
+	
 	on_enter_travel_state = {
 		scope:activity ?= {
 			# Sort starting travel modifiers.
@@ -2206,7 +2206,7 @@
 			}
 			#Create a memory of your very first pilgrimage
 			if = {
-				limit = {
+				limit = { 
 					NOT = {
 						any_memory = {
 							has_memory_type = completed_pilgrimage
@@ -2231,7 +2231,7 @@
 						set_variable = {
 							name = pilgrimage_length
 							value = scope:activity.var:pilgrimage_distance
-						}
+						} 
 						if = {
 							limit = { exists = var:pilgrimage_length }
 							#To prevent 'unused except in loc' errors :catto:
@@ -2243,14 +2243,14 @@
 			else_if = {
 				limit = { exists = scope:activity.var:friend_companion }
 				create_character_memory = {
-					type = completed_pilgrimage_friend
+					type = completed_pilgrimage_friend 
 					participants = { friend = scope:activity.var:friend_companion }
 				}
 				scope:new_memory = {
 					set_variable = {
 						name = pilgrimage_destination
 						value = scope:activity.activity_location
-					}
+					} 
 				}
 			}
 			#Creates a character memory of the completed pilgrimage
@@ -2295,7 +2295,7 @@
 						set_variable = {
 							name = pilgrimage_length
 							value = scope:activity.var:pilgrimage_distance
-						}
+						} 
 						if = {
 							limit = { exists = var:pilgrimage_length }
 							#To prevent 'unused except in loc' errors :catto:
@@ -2305,7 +2305,7 @@
 						limit = { exists = var:memory_type_of_pilgrimage }
 						#To prevent 'unused except in loc' errors :catto:
 					}
-				}
+				}	
 			}
 		}
 		# Dynasty Legacies
@@ -2367,7 +2367,7 @@
 		environment = "environment_travel_bridge"
 		ambience = "event:/SFX/Events/Backgrounds/mountains_day"
 	}
-
+	
 	background = { # Farmland, settled
 		trigger = {
 			NOT = { scope:host.location = scope:activity.activity_location }
@@ -2522,7 +2522,7 @@
 			}
 		}
 		texture = "gfx/interface/illustrations/event_scenes/bp1_wetlands.dds"
-		environment = "environment_event_bp1_wetlands"
+		environment = "environment_event_bp1_wetlands" 
 		ambience = "event:/SFX/Events/Backgrounds/deciduous_forest_day"
 	}
 
@@ -2678,11 +2678,11 @@
 	background = {
 		trigger = {
 			OR = {
-				activity_location.province_owner ?= {
+				activity_location.province_owner ?= { 
 					OR = {
 						government_has_flag = government_is_clan
 						government_has_flag = government_is_tribal
-					}
+					} 
 				}
 				activity_location.culture = { has_graphical_steppe_culture_group_trigger = yes }
 			}
@@ -2700,7 +2700,7 @@
 		ambience = "event:/DLC/FP1/SFX/Events/event_temple"
 	}
 	background = {
-		trigger = {
+		trigger = { 
 			scope:host.faith = { has_doctrine = tenet_sanctity_of_nature }
 		}
 		texture = "gfx/interface/illustrations/event_scenes/forest.dds"
@@ -2730,7 +2730,7 @@
 
 		pilgrim = {
 			camera = camera_event_center
-
+			
 			effect = {
 				if = {
 					limit = {
@@ -2771,7 +2771,7 @@
 
 		pilgrim = {
 			camera = camera_event_center
-
+			
 			effect = {
 				every_attending_character = {
 					limit = {
@@ -2804,7 +2804,7 @@
 
 		pilgrim = { # Travel
 			camera = camera_activity_horse
-
+			
 			effect = {
 				if = {
 					limit = {
@@ -2832,7 +2832,7 @@
 
 		pilgrim = { # Travel
 			camera = camera_activity_horse
-
+			
 			effect = {
 				every_attending_character = {
 					limit = {
@@ -2849,10 +2849,10 @@
 				animation = jockey_walk
 			}
 		}
-
+		
 		host = {
 			camera = camera_event_center
-
+			
 			effect = {
 				if = {
 					limit = {
@@ -2892,10 +2892,10 @@
 				animation = personality_compassionate
 			}
 		}
-
+		
 		travel_host = {
 			camera = camera_activity_horse
-
+			
 			effect = {
 				if = {
 					limit = {
@@ -2920,7 +2920,7 @@
 
 		pilgrim = {
 			camera = camera_event_center
-
+			
 			effect = {
 				every_attending_character = {
 					limit = {
@@ -2953,7 +2953,7 @@
 
 		pilgrim = {
 			camera = camera_event_center
-
+			
 			effect = {
 				if = {
 					limit = {
@@ -2994,7 +2994,7 @@
 
 		pilgrim = { # Travel
 			camera = camera_activity_horse
-
+			
 			effect = {
 				every_attending_character = {
 					limit = {
@@ -3014,7 +3014,7 @@
 
 		pilgrim = { # Travel
 			camera = camera_activity_horse
-
+			
 			effect = {
 				if = {
 					limit = {

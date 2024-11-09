@@ -68,7 +68,7 @@ court_position_does_not_already_have_a_job_trigger = {
 			has_court_position = travel_leader_court_position
 			has_court_position = wet_nurse_court_position
 			has_court_position = akolouthos_court_position
-
+			
 			#Unop: Missing entries for court positions:
 			has_court_position = court_artificer_court_position
 			has_court_position = cave_hermit_court_position
@@ -127,7 +127,7 @@ can_appoint_char_to_court_position = {
 	$CHAR$ = {
 		NOT = { this = scope:hiring_liege }
 		NOT = { has_court_position = $COURT_POS$ }
-		can_be_employed_as = $COURT_POS$
+		can_be_employed_as = $COURT_POS$	
 	}
 }
 
@@ -220,7 +220,7 @@ has_learning_court_position = {
 
 court_position_stewardship_trigger = { # Is courtier suited to stewardship positions?
 	OR = {
-		has_education_stewardship_trigger = yes
+		has_education_stewardship_trigger = yes 
 		has_trait = diligent
 		stewardship >= medium_skill_rating
 	}
@@ -531,7 +531,7 @@ chief_qadi_validity_trigger = {
 		is_female = yes
 	}
 	trigger_else = { always = yes }
-}
+}				
 
 garuda_validity_trigger = {
 	base_court_position_validity_trigger = { EMPLOYER = $EMPLOYER$ }
@@ -610,7 +610,7 @@ master_assassin_validity_trigger = {
 		has_doctrine = tenet_fp3_fedayeen
 		NOR = {
 			has_doctrine = tenet_pacifism
-			has_doctrine = tenet_dharmic_pacifism
+			has_doctrine = tenet_dharmic_pacifism 
 		}
 	}
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $EMPLOYER$ }
@@ -660,7 +660,7 @@ akolouthos_validity_trigger = {
 				}
 				custom_tooltip = {
 					text = court_position_fp1_performative_honour
-					has_cultural_tradition = tradition_fp1_performative_honour
+					has_cultural_tradition = tradition_fp1_performative_honour 
 				}
 				custom_tooltip = {
 					text = court_position_north_germanic
@@ -752,7 +752,7 @@ court_position_generator_pickable_trigger = {
 	}
 	trigger_if = { #Unop: I needed a way to prevent "bad court position" to be selected for hold_court.8090
 		limit = { exists = var:unop_prevent_bad_court_position }
-		NOR = {
+		NOR = { 
 			flag:$POS$ = flag:executioner
 			flag:$POS$ = flag:court_jester
 			flag:$POS$ = flag:food_taster

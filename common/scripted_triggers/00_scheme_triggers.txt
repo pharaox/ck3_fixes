@@ -421,8 +421,8 @@ can_use_befriend_scheme_trigger = {
 		AND = {
 			government_has_flag = government_is_clan
 			is_in_same_clan_as_trigger = { CHARACTER = $TARGET$ }
-			house = { has_house_unity_stage = harmonious }
-		}
+			house = { has_house_unity_stage = harmonious }	
+		}	
 	}
 }
 
@@ -511,7 +511,7 @@ is_savable_murder_scheme_trigger = {
 	}
 }
 
-# Could & would this lover of $TARGET$
+# Could & would this lover of $TARGET$ 
 available_lover_to_sacrifice_in_murder_trigger = {
 	is_ruler = no
 	is_available_ai_adult = yes
