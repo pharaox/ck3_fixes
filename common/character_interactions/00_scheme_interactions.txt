@@ -1130,7 +1130,7 @@ seduce_interaction = {
 			has_trait = celibate
 			has_trait = chaste
 			scheme_generic_ai_blocker_trigger = yes
-			primary_title ?= { # FIX
+			primary_title ?= { # FIX errors
 				is_mercenary_company = yes
 			}
 			AND = { # No one cares about City barons

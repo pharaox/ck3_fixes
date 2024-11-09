@@ -634,11 +634,11 @@ ep3_contract_event.0002 = {
 		every_courtier_or_guest = {
 			limit = {
 				is_travelling = no
-				is_in_army = no # FIX Prevent army characters from leaving their army
+				is_in_army = no # FIX 1709203 Prevent army characters from leaving their army
 			}
 			add_to_list = task_contract_companions
 		}
-		# FIX Take prisoners as well
+		# FIX 1709203 Take prisoners as well
 		every_prisoner = {
 			limit = {
 				is_travelling = no

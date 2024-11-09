@@ -56,7 +56,7 @@
 			limit = {
 				faith = { has_doctrine_parameter = mandatory_hajj }
 				capital_province.barony ?= title:b_makka
-				is_landless_adventurer = no # FIX
+				is_landless_adventurer = no # FIX ?
 			}
 			custom_tooltip = {
 				text = activity_pilgrimage.is_location_valid.capital_is_mecca
@@ -105,7 +105,7 @@
 			#Invalidate flag, until/unless this is fixed in code
 			NOT = { has_variable = pilgrimage_invalidated_illness }
 			#Don't change your capital to be the holy site destination
-			trigger_if = { # FIX
+			trigger_if = { # FIX ?
 				limit = { is_landless_adventurer = no }
 				NOT = { capital_province.barony = scope:activity.activity_location.barony }
 			}
@@ -235,7 +235,7 @@
 			}
 		}
 		#You can't pilgrimage to your own capital
-		trigger_if = { # FIX
+		trigger_if = { # FIX ?
 			limit = {
 				scope:host = { is_landless_adventurer = no }
 			}
@@ -1179,7 +1179,7 @@
 				}
 				is_valid = {
 					# You only get to Hajj every X years.
-					#trigger_if = { # FIX
+					#trigger_if = { # FIX ?
 					#	limit = {
 					#		exists = capital_province
 					#		NOT = { capital_province.barony = title:b_makka }
@@ -1204,7 +1204,7 @@
 						NAND = {
 							exists = capital_province
 							capital_province.barony = title:b_makka
-							is_landless_adventurer = no # FIX
+							is_landless_adventurer = no # FIX ?
 						}
 					}
 				}

@@ -38,7 +38,7 @@ action_laamp_apprehension_threat = {
 				is_landless_adventurer = yes
 				domicile.domicile_location.county.holder ?= {
 					OR = {
-						# FIX Actually check if they can imprison you
+						# FIX 1709191 Check if they can actually imprison you
 						has_opinion_modifier = {
 							target = root
 							modifier = eviction_ignored_opinion
@@ -55,7 +55,7 @@ action_laamp_apprehension_threat = {
 			domicile.domicile_location.county.holder ?= {
 				if = {
 					limit = {
-						# FIX Actually check if they can imprison you
+						# FIX 1709191 Check if they can actually imprison you
 						has_opinion_modifier = {
 							target = root
 							modifier = eviction_ignored_opinion
@@ -65,7 +65,7 @@ action_laamp_apprehension_threat = {
 				}
 				every_liege_or_above = {
 					limit = {
-						# FIX Actually check if they can imprison you
+						# FIX 1709191 Check if they can actually imprison you
 						has_opinion_modifier = {
 							target = root
 							modifier = eviction_ignored_opinion

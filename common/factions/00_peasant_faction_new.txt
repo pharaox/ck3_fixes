@@ -244,7 +244,7 @@ peasant_faction = {
 		modifier = {
 			desc = "FACTION_REASON_AT_WAR_WITH_TARGET"
 			add = 1000
-			# FIX Use scope:faction since joined_faction requires character scope
+			# FIX ck3-tiger Use scope:faction since joined_faction requires character scope
 			scope:faction = {
 				faction_is_at_war = yes
 			}

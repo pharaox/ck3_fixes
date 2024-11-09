@@ -141,7 +141,7 @@ travel_danger_events.6000 = { #Animal attack
 	}
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		is_location_valid_for_travel_event_on_land = yes
 		location = {
 			exists = province_owner
@@ -172,7 +172,7 @@ travel_danger_events.6000 = { #Animal attack
 		save_scope_as = root_scope
 		save_scope_as = big_local_game
 		hunt_activity_dangerous_game_effect = { PROVINCE = location }
-		current_travel_plan ?= { # FIX: Handle non-existing scope
+		current_travel_plan ?= { # FIX errors Handle non-existing scope
 			random_entourage_character = {
 				limit = {
 					can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = root }
@@ -285,7 +285,7 @@ travel_danger_events.6000 = { #Animal attack
 	option = { #Run!
 		name = travel_danger_events.6000.c
 		add_prestige = minor_prestige_loss
-		current_travel_plan ?= { # FIX: Handle non-existing scope
+		current_travel_plan ?= { # FIX errors Handle non-existing scope
 			delay_travel_plan = { days = 10 }
 		}
 		stress_impact = {
@@ -451,7 +451,7 @@ travel_danger_events.6010 = { #Siege
 	cooldown = { months = 1 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		is_location_valid_for_travel_event_on_land = yes
 		location = {
 			exists = province_owner
@@ -465,9 +465,10 @@ travel_danger_events.6010 = { #Siege
 					type = raid
 				}
 			}
-			# FIX: Adapt Unofficial Patch changes
+			NOT = {
+				any_army_in_location = { army_owner = root }
+			}
 			any_army_in_location = {
-				NOT = { army_owner = root }
 				OR = {
 					is_army_in_siege = yes
 					is_army_in_raid = yes
@@ -489,8 +490,6 @@ travel_danger_events.6010 = { #Siege
 			province_owner = { save_scope_as = siege_victim }
 			ordered_army_in_location = {
 				limit = {
-					NOT = { army_owner = root }
-					#exists = army_commander # FIX: Not needed
 					OR = {
 						is_army_in_siege = yes
 						is_army_in_raid = yes
@@ -928,7 +927,7 @@ travel_danger_events.6011 = { #Battal
 	cooldown = { months = 1 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		is_location_valid_for_travel_event_on_land = yes
 		location = {
 			exists = province_owner
@@ -1430,7 +1429,7 @@ travel_danger_events.6012 = { #Army
 	cooldown = { months = 1 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		is_location_valid_for_travel_event_on_land = yes
 		location = {
 			exists = province_owner
@@ -1854,7 +1853,7 @@ travel_danger_events.6013 = { #Occupation
 	cooldown = { months = 1 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		is_location_valid_for_travel_event_on_land = yes
 		location = {
 			exists = province_owner
@@ -2255,7 +2254,7 @@ travel_danger_events.6020 = { #Craig
 	cooldown = { months = 1 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		current_travel_plan.days_travelled >= 15
 		location = {
 			OR = {
@@ -2378,7 +2377,7 @@ travel_danger_events.6030 = { #Spoiled food
 	cooldown = { months = 6 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		current_travel_plan.days_travelled >= 15
 		is_adult = yes
 		current_travel_plan = {
@@ -3072,7 +3071,7 @@ travel_danger_events.6040 = { #Disease
 	cooldown = { months = 6 }
 
 	trigger = {
-		is_available_travelling_adult = yes # FIX: Ensure event fires onfly for travelling characters
+		is_available_travelling_adult = yes # FIX precaution Ensure event fires onfly for travelling characters
 		current_travel_plan.days_travelled >= 15
 		is_adult = yes
 		is_healthy = yes

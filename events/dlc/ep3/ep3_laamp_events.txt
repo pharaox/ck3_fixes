@@ -4958,14 +4958,14 @@ ep3_laamps.5010 = {
 			NOT = {
 				domicile = { has_domicile_building = camp_main_04 }
 			}
-			has_ongoing_domicile_construction = no # FIX
+			has_ongoing_domicile_construction = no # FIX ? Upgrading is not possible with ongoing construction
 			gold >= scope:gold_cost
 		}
 		show_as_unavailable = {
 			NOT = {
 				domicile = { has_domicile_building = camp_main_04 }
 			}
-			has_ongoing_domicile_construction = no # FIX
+			has_ongoing_domicile_construction = no # FIX ? Upgrading is not possible with ongoing construction
 			gold <= scope:gold_cost
 		}
 		custom_tooltip = ep3_laamps.5010.b.tt

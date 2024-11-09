@@ -2738,7 +2738,7 @@ start_stealing_back_artifact = {
 					can_be_claimed_by = scope:actor
 				}
 			}
-			# FIX: Only show if the recipient actually has artifacts
+			# FIX 1706325 Only show if the recipient actually has artifacts
 			AND = {
 				scope:recipient = { has_any_artifact = yes }
 				scope:actor = {
@@ -2832,7 +2832,7 @@ start_stealing_back_artifact = {
 			}
 		}
 
-		# FIX: Limit range for landless adventurers
+		# FIX 1706325 Limit range for landless adventurers
 		trigger_if = {
 			limit = {
 				scope:actor = { is_landless_adventurer = yes }
@@ -2882,7 +2882,7 @@ start_stealing_back_artifact = {
 			}
 		}
 
-		# FIX: Landless adventurers can only steal masterwork artifacts without a claim or a contract
+		# FIX 1706325 Landless adventurers can only steal masterwork artifacts without a claim or a contract
 		trigger_if = {
 			limit = {
 				scope:actor = {

@@ -8146,7 +8146,7 @@ ep3_laamp_decision_event.1030 = {
 								root = { is_attracted_to_gender_of = prev } #Prev is the spouse scope
 								#They might want to marry us
 								is_attracted_to_gender_of = root
-								# FIX Avoid old characters
+								# FIX 1709184 Avoid old characters
 								age <= 40
 							}
 							save_scope_as = laamp_spouse_material
@@ -8164,7 +8164,7 @@ ep3_laamp_decision_event.1030 = {
 								template = generic_peasant_character
 								location = scope:visiting_location
 								dynasty = none
-								age = { 18 40 } # FIX Avoid old characters
+								age = { 18 40 } # FIX 1709184 Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8183,7 +8183,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = male
-								age = { 18 40 } # FIX Avoid old characters
+								age = { 18 40 } # FIX 1709184 Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8201,7 +8201,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = female
-								age = { 18 40 } # FIX Avoid old characters
+								age = { 18 40 } # FIX 1709184 Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8781,7 +8781,7 @@ scripted_effect 1031_been_to_effect = {
 		save_scope_as = been_to_$GUILD$
 	}
 	#Go back to the previous screen
-	# FIX Return to the correct place without checking var:return_from_location
+	# FIX 1712826 Return to the correct place without checking var:return_from_location
 	if = {
 		limit = {
 			OR = {
@@ -14078,7 +14078,7 @@ ep3_laamp_decision_event.1043 = {
 				}
 			}
 		}
-		# FIX Limit this to same religion
+		# FIX ? Limit this to same religion
 		trigger = {
 			faith.religion = scope:visiting_location.faith.religion
 		}
@@ -14164,7 +14164,7 @@ ep3_laamp_decision_event.1043 = {
 	option = {
 		name = ep3_laamp_decision_event.1043.b
 		trigger = {
-			# FIX Limit this to same religion
+			# FIX ? Limit this to same religion
 			faith.religion = scope:visiting_location.faith.religion
 			NOR = {
 				has_character_modifier = laamp_decision_church_blessing_stress_loss_modifier

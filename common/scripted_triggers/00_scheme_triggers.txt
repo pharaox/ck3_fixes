@@ -670,7 +670,7 @@ is_valid_agent_standard_trigger = {
 			}
 		}
 	}
-	# FIX Prevent army characters from acting as agents
+	# FIX ? Prevent army characters from acting as agents
 	is_in_army = no
 }
 

@@ -3492,7 +3492,7 @@ hold_court.4001 = {
 			has_court_event_flag = no
 			is_ai = yes
 		}
-		root.primary_heir ?= { # FIX: Handle non-existing scope
+		root.primary_heir ?= { # FIX errors Handle non-existing scope
 			has_court_event_flag = no
 			is_ai = yes
 			age >= 13

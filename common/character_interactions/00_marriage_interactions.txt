@@ -900,7 +900,7 @@ arrange_marriage_interaction = {
 				limit = {
 					exists = scope:secondary_actor
 					scope:actor = scope:secondary_actor
-					# FIX: Use correct scope
+					# FIX ck3-agent Use correct scope
 					scope:actor = {
 						is_female = yes
 						is_ai = no
@@ -1289,7 +1289,7 @@ marry_off_interaction = {
 					exists = scope:actor
 					exists = scope:recipient
 					exists = scope:secondary_recipient
-					# FIX: Fix prestige loss when marrying off unrelated characters
+					# FIX ? Fix prestige loss when marrying off unrelated characters
 					exists = scope:secondary_actor
 					scope:secondary_actor = { is_close_family_of = scope:actor }
 					scope:recipient = {
@@ -4244,7 +4244,7 @@ divorce_character_house_head_interaction = {
 	}
 
 	on_decline = {
-		scope:actor = { # FIX
+		scope:actor = { # FIX ck3-tiger
 			send_interface_toast = {
 				type = event_toast_effect_bad
 				title = divorce_character_rel_head_interaction_decline_notification
@@ -4610,7 +4610,7 @@ divorce_character_rel_head_interaction = {
 	}
 
 	on_decline = {
-		scope:actor = { # FIX
+		scope:actor = { # FIX ck3-tiger
 			send_interface_toast = {
 				type = event_toast_effect_bad
 				title = divorce_character_rel_head_interaction_decline_notification
@@ -5115,7 +5115,7 @@ divorce_character_dynast_request_rel_head_interaction = {
 	}
 
 	on_decline = {
-		scope:actor = { # FIX
+		scope:actor = { # FIX ck3-tiger
 			send_interface_toast = {
 				type = event_toast_effect_bad
 				title = divorce_character_dynast_request_rel_head_interaction_decline_notification
@@ -5226,6 +5226,19 @@ elope_interaction = {
 			can_start_scheme = {
 				type = elope
 				target_character = scope:recipient
+			}
+		}
+		# FIX Limit range for landless adventurers
+		trigger_if = {
+			limit = {
+				scope:actor = {
+					is_landless_adventurer = yes
+				}
+			}
+			#Has to be used instead of diplo range checks in laamp to landed interactions
+			ep3_laamp_diplo_range_trigger = {
+				TARGET = scope:recipient
+				LAAMP = scope:actor
 			}
 		}
 	}

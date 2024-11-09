@@ -5461,7 +5461,7 @@ master_of_horse_court_position = {
 
 	valid_character = {
 		scope:employee = {
-			master_of_horse_validity_trigger = { EMPLOYER = scope:liege } # FIX
+			master_of_horse_validity_trigger = { EMPLOYER = scope:liege } # FIX ? Use correct validity trigger
 		}
 	}
 

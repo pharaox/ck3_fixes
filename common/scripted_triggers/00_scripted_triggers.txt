@@ -220,7 +220,7 @@ basic_allowed_to_imprison_character_trigger = { #Only to be used in is_shown for
 		OR = {
 			AND = {
 				target_is_liege_or_above = scope:allowed_imprisoner
-				# FIX Not allowed to imprison if foreign court guest
+				# FIX ? Not allowed to imprison if foreign court guest
 				trigger_if = {
 					limit = { is_foreign_court_guest = yes }
 					host = {
