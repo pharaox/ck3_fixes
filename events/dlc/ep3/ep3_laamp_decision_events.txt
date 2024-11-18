@@ -1627,7 +1627,6 @@ ep3_laamp_decision_event.1000 = {
 		}
 		custom_tooltip = ep3_laamp_decision_event.1000.i.tt
 		#For loc reasons
-		debug_log = "Returning to camp" # DEBUG
 		1000_remember_settlement_effect = yes
 		1000_clean_up_effect = yes
 		ai_chance = { base = 50 }
@@ -8146,7 +8145,7 @@ ep3_laamp_decision_event.1030 = {
 								root = { is_attracted_to_gender_of = prev } #Prev is the spouse scope
 								#They might want to marry us
 								is_attracted_to_gender_of = root
-								# FIX 1709184 Avoid old characters
+								#Unop Avoid old characters
 								age <= 40
 							}
 							save_scope_as = laamp_spouse_material
@@ -8164,7 +8163,7 @@ ep3_laamp_decision_event.1030 = {
 								template = generic_peasant_character
 								location = scope:visiting_location
 								dynasty = none
-								age = { 18 40 } # FIX 1709184 Avoid old characters
+								age = { 18 40 } #Unop Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8183,7 +8182,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = male
-								age = { 18 40 } # FIX 1709184 Avoid old characters
+								age = { 18 40 } #Unop Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8201,7 +8200,7 @@ ep3_laamp_decision_event.1030 = {
 								location = scope:visiting_location
 								dynasty = none
 								gender = female
-								age = { 18 40 } # FIX 1709184 Avoid old characters
+								age = { 18 40 } #Unop Avoid old characters
 								culture = scope:visiting_location.culture
 								faith = scope:visiting_location.faith
 								diplomacy = { low_skill_rating high_skill_rating }
@@ -8780,8 +8779,8 @@ scripted_effect 1031_been_to_effect = {
 		}
 		save_scope_as = been_to_$GUILD$
 	}
-	#Go back to the previous screen
-	# FIX 1712826 Return to the correct place without checking var:return_from_location
+	# Unop Return to the correct place without checking var:return_from_location
+	# to prevent exiting the event chain prematurely and without cleanup
 	if = {
 		limit = {
 			OR = {
