@@ -3,8 +3,9 @@ common/character_interactions/00_artifact_interactions.txt
 common/character_interactions/00_courtier_and_guest_interactions.txt
 common/character_interactions/00_marriage_interactions.txt
 common/character_interactions/00_scheme_interactions.txt
-common/defines/00_defines.txt
 common/factions/00_peasant_faction_new.txt
+common/scripted_effects/00_education_effects.txt
+common/scripted_effects/00_laamp_effects.txt
 common/scripted_effects/03_bp1_scripted_effects.txt
 common/scripted_effects/03_dlc_fp3_artifact_creation_effects.txt
 common/scripted_triggers/00_scheme_triggers.txt
@@ -16,3 +17,4 @@ events/dlc/ep3/ep3_laamp_decision_events.txt
 events/dlc/ep3/ep3_laamp_events.txt
 events/travel_events/travel_danger_events_joe.txt
 events/travel_events/travel_events.txt
+gui/window_domicile.gui
