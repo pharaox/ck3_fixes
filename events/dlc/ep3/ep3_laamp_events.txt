@@ -4593,6 +4593,7 @@ ep3_laamps.5005 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 		#Ensure we're in a place that's held by someone
 		exists = location.county.holder
@@ -4853,8 +4854,10 @@ ep3_laamps.5010 = {
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
 		age < 65 #Just for loc tonality
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 		any_courtier = {
+			is_available_allow_travelling = yes #Unop Ensure availability
 			is_valid_active_event_recurrer_trigger = { LIEGE = ROOT }
 			is_adult = yes # is an adult
 			age < 65 # but not too old, so wincing in pain isn't just from being real old
@@ -4864,6 +4867,7 @@ ep3_laamps.5010 = {
 	immediate = {
 		random_courtier = {
 			limit = {
+				is_available_allow_travelling = yes #Unop Ensure availability
 				is_valid_active_event_recurrer_trigger = { LIEGE = ROOT }
 				is_adult = yes # is an adult
 				age < 65 # but not too old, so wincing in pain isn't just from being real old
@@ -5091,6 +5095,7 @@ ep3_laamps.5015 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 	}
 
@@ -5364,6 +5369,7 @@ ep3_laamps.5020 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 		NOT = {
 			culture = location.culture
@@ -5656,6 +5662,7 @@ ep3_laamps.5025 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 	}
 
 	immediate = {
@@ -5847,6 +5854,7 @@ ep3_laamps.5030 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 	}
 
@@ -6220,6 +6228,7 @@ ep3_laamps.5035 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 	}
 
@@ -6495,6 +6504,7 @@ ep3_laamps.5040 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 	}
 
@@ -6648,6 +6658,7 @@ ep3_laamps.5045 = {
 		#Standard checks
 		has_ep3_dlc_trigger = yes
 		is_landless_adventurer = yes
+		is_available_allow_travelling = yes #Unop Ensure availability
 		is_location_valid_for_travel_event_on_land = yes
 		location.barony.holder ?= {
 			is_available_ai_adult = yes
