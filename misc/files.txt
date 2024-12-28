@@ -1,5 +1,2 @@
-common/character_interactions/00_courtier_and_guest_interactions.txt
 common/scripted_triggers/00_scheme_triggers.txt
 events/dlc/ep3/ep3_laamp_decision_events.txt
-events/travel_events/travel_danger_events_joe.txt
-events/travel_events/travel_events.txt
